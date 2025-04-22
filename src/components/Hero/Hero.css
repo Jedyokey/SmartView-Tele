@@ -1,0 +1,372 @@
+/* Base Styles */
+.hero-container {
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hero-left {
+  width: 40%;
+  height: 100%;
+  background-color: #fffae6;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hero-right {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #001c29;
+}
+
+.hero-left h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #333;
+  line-height: 1.2;
+}
+
+.highlight-smart {
+  color: #00796b;
+  font-weight: bold;
+  animation: pulseSmart 2s infinite alternate;
+}
+
+.highlight-tele {
+  color: #ffb300;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  animation: pulseTele 2s infinite alternate;
+}
+
+@keyframes pulseSmart {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulseTele {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+.hero-left p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.shop-now-btn,
+.whatsapp-btn {
+  background-color: #00796b;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin: 10px 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-btn {
+  background-color: #25d366;
+}
+
+.shop-now-btn:hover,
+.whatsapp-btn:hover {
+  background-color: #004d40;
+}
+
+.hero-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.carousel-fade {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fade-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 1;
+}
+
+.fade-image.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.nav-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.nav-btn {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* 1. Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .hero-left {
+    padding: 70px;
+  }
+
+  .hero-left h1 {
+    font-size: 3.5rem;
+  }
+
+  .hero-left p {
+    font-size: 1.4rem;
+  }
+
+  .shop-now-btn,
+  .whatsapp-btn {
+    padding: 14px 24px;
+    font-size: 1.2rem;
+  }
+}
+
+/* 2. Desktop (992px-1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .hero-left {
+    padding: 50px;
+  }
+
+  .hero-left h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero-left p {
+    font-size: 1.2rem;
+  }
+}
+
+/* 3. Tablet (768px-991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+
+  .hero-left,
+  .hero-right {
+    width: 100%;
+  }
+
+  .hero-left {
+    padding: 40px 30px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-right {
+    height: 450px;
+  }
+
+  .hero-left h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-left p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .shop-now-btn,
+  .whatsapp-btn {
+    width: 80%;
+    max-width: 400px;
+    justify-content: center;
+  }
+}
+
+/* 4. Large Mobile (576px-767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+
+  .hero-left,
+  .hero-right {
+    width: 100%;
+  }
+
+  .hero-left {
+    padding: 30px 25px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-right {
+    height: 350px;
+  }
+
+  .hero-left h1 {
+    font-size: 2rem;
+  }
+
+  .hero-left p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .shop-now-btn,
+  .whatsapp-btn {
+    width: 90%;
+    font-size: 1rem;
+    padding: 10px 16px;
+    justify-content: center;
+  }
+
+  .nav-controls {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .nav-btn {
+    font-size: 1rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+/* 5. Small Mobile (575px and below) */
+@media (max-width: 575px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+
+  .hero-left,
+  .hero-right {
+    width: 100%;
+  }
+
+  .hero-left {
+    padding: 25px 15px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-right {
+    height: 280px;
+  }
+
+  .hero-left h1 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .hero-left p {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+  }
+
+  .shop-now-btn,
+  .whatsapp-btn {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    margin: 6px 0;
+    justify-content: center;
+  }
+
+  .nav-controls {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .nav-btn {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .icon {
+    font-size: 0.9rem;
+  }
+}
+
+/* Additional Orientation-specific adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero-container {
+    flex-direction: row;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .hero-left {
+    width: 40%;
+    padding: 20px;
+  }
+
+  .hero-right {
+    width: 60%;
+    height: 100vh;
+  }
+
+  .hero-left h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-left p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .shop-now-btn,
+  .whatsapp-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    margin: 5px 0;
+  }
+}

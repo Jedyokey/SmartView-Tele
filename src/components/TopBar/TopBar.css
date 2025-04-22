@@ -1,0 +1,48 @@
+/* ===== ORIGINAL STYLES ===== */
+.top-bar {
+  font-size: 0.9rem;
+  background-color: #f8f9fa; 
+  padding: 0.5rem 2rem 0.5rem 1rem; /* Original padding */
+  border-bottom: 1px solid #eee; 
+}
+
+.top-bar a {
+  color: #333; 
+  transition: color 0.3s; 
+}
+
+.top-bar a:hover {
+  color: #007bff; 
+}
+
+.top-socials i {
+  font-size: 1rem; 
+}
+
+/* ===== TABLET FIX (769px-991px) - MINIMAL ADJUSTMENT ===== */
+@media (min-width: 769px) and (max-width: 991px) {
+  .top-bar {
+    margin-left: -12px;
+    margin-right: -35px;
+    width: calc(100% + 57px); 
+  }
+
+  /* Overflow protection (doesn't affect styles) */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Ensure container doesn't clip content */
+  .top-bar > .container-fluid {
+    padding-left: 17px !important;
+    padding-right: 35px !important;
+  }
+}
+
+/* ===== MOBILE HIDING (UNCHANGED) ===== */
+@media (max-width: 768px) {
+  .top-bar {
+    display: none !important;
+  }
+}
+  

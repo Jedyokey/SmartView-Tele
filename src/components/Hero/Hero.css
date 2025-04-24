@@ -77,7 +77,7 @@
   background-color: #00796b;
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 12px 20px !important;
   margin: 10px 0;
   font-size: 1.1rem;
   cursor: pointer;
@@ -90,11 +90,17 @@
 
 .whatsapp-btn {
   background-color: #25d366;
+  padding: 12px 20px !important;
+  width: auto !important;
+}
+
+.whatsapp-btn .icon {
+  margin-right: 10px !important;
 }
 
 .shop-now-btn:hover,
 .whatsapp-btn:hover {
-  background-color: #004d40;
+  background-color: #004d40 !important;
 }
 
 .hero-right img {
@@ -223,8 +229,8 @@
 
   .shop-now-btn,
   .whatsapp-btn {
-    width: 80%;
-    max-width: 400px;
+    width: 80% !important;
+    max-width: 400px !important;
     justify-content: center;
   }
 }
@@ -262,7 +268,7 @@
 
   .shop-now-btn,
   .whatsapp-btn {
-    width: 90%;
+    width: 90% !important;
     font-size: 1rem;
     padding: 10px 16px;
     justify-content: center;
@@ -313,7 +319,7 @@
 
   .shop-now-btn,
   .whatsapp-btn {
-    width: 100%;
+    width: 100% !important;
     font-size: 0.9rem;
     padding: 10px 14px;
     margin: 6px 0;

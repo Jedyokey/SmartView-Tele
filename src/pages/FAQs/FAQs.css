@@ -1,0 +1,341 @@
+/* FAQs Page Styling with Bright Colors */
+
+.faqs-page {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e4f1fe 100%);
+    padding: 40px 0 80px;
+    min-height: 100vh;
+  }
+  
+  .faqs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Header Styling */
+  .faqs-main-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #00796b;
+    margin-bottom: 10px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+  }
+  
+  .faqs-main-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #ffb300;
+    border-radius: 2px;
+  }
+  
+  .faqs-subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 40px;
+  }
+  
+  /* Category Navigation */
+  .category-nav {
+    padding-right: 30px;
+  }
+  
+  .category-nav-inner {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 25px;
+    position: sticky;
+    top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #00796b;
+  }
+  
+  .category-nav h3 {
+    font-size: 1.4rem;
+    color: #00796b;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .category-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .category-nav li {
+    margin-bottom: 12px;
+  }
+  
+  .category-nav a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .category-nav a:hover {
+    background-color: rgba(0, 121, 107, 0.1);
+    color: #00796b;
+    transform: translateX(5px);
+  }
+  
+  .category-nav a.active {
+    background-color: #00796b;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 121, 107, 0.2);
+  }
+  
+  /* Mobile Category Selector */
+  .category-selector {
+    margin-bottom: 30px;
+  }
+  
+  .category-selector .form-select {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* FAQ Categories */
+  .faq-category {
+    margin-bottom: 50px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  
+  .faq-category.active {
+    opacity: 1;
+  }
+  
+  .category-title {
+    font-size: 2.2rem;
+    color: #00796b;
+    margin-bottom: 25px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .category-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #ffb300;
+    border-radius: 2px;
+  }
+  
+  /* Accordion Styling */
+  .faq-accordion-container {
+    padding-left: 20px;
+  }
+  
+  .faq-accordion {
+    background: transparent;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .accordion-item {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    margin-bottom: 15px;
+    border-radius: 10px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .accordion-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  .accordion-header {
+    padding: 0;
+  }
+  
+  .accordion-button {
+    padding: 20px 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: none !important;
+  }
+  
+  .accordion-button:not(.collapsed) {
+    color: #00796b;
+    background-color: rgba(0, 121, 107, 0.05);
+    border-bottom: 1px solid rgba(0, 121, 107, 0.1);
+  }
+  
+  .accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0, 121, 107, 0.1);
+  }
+  
+  .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2300796b' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    transition: transform 0.3s ease;
+  }
+  
+  .accordion-button:not(.collapsed)::after {
+    transform: rotate(-180deg);
+  }
+  
+  .accordion-body {
+    padding: 20px 25px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  
+  /* Contact Section */
+  .contact-section {
+    margin-top: 60px;
+    background: linear-gradient(135deg, rgba(0, 121, 107, 0.9) 0%, rgba(0, 77, 64, 0.9) 100%);
+    padding: 40px;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 121, 107, 0.2);
+  }
+  
+  .contact-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .contact-section p {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+  
+  .contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .contact-buttons .btn {
+    padding: 12px 25px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .contact-buttons .btn-primary {
+    background-color: #ffb300;
+    border-color: #ffb300;
+    color: #333;
+  }
+  
+  .contact-buttons .btn-primary:hover {
+    background-color: #ffa000;
+    border-color: #ffa000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 179, 0, 0.3);
+  }
+  
+  .contact-buttons .btn-outline-primary {
+    color: white;
+    border-color: white;
+  }
+  
+  .contact-buttons .btn-outline-primary:hover {
+    background-color: white;
+    color: #00796b;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 1199px) {
+    .faqs-main-title {
+      font-size: 3rem;
+    }
+    
+    .category-title {
+      font-size: 2rem;
+    }
+  }
+  
+  @media (max-width: 991px) {
+    .faqs-main-title {
+      font-size: 2.5rem;
+    }
+    
+    .category-title {
+      font-size: 1.8rem;
+    }
+    
+    .faq-accordion-container {
+      padding-left: 0;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .faqs-page {
+      padding: 30px 0 60px;
+    }
+    
+    .faqs-main-title {
+      font-size: 2.2rem;
+    }
+    
+    .faqs-subtitle {
+      font-size: 1rem;
+    }
+    
+    .category-title {
+      font-size: 1.6rem;
+      margin-top: 20px;
+    }
+    
+    .accordion-button {
+      padding: 15px 20px;
+      font-size: 1rem;
+    }
+    
+    .accordion-body {
+      padding: 15px 20px;
+    }
+    
+    .contact-section {
+      padding: 30px 20px;
+    }
+  }
+  
+  @media (max-width: 575px) {
+    .faqs-main-title {
+      font-size: 1.8rem;
+    }
+    
+    .category-title {
+      font-size: 1.4rem;
+    }
+    
+    .contact-buttons .btn {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }

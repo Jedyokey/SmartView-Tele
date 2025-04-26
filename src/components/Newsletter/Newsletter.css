@@ -1,0 +1,152 @@
+.newsletter-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #fffae6 0%, #fff5d6 100%);
+  }
+  
+  .newsletter-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+  
+  .newsletter-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #ffb300;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 2rem;
+  }
+  
+  .newsletter-container h2 {
+    font-size: 2.2rem;
+    color: #001c29;
+    margin-bottom: 15px;
+  }
+  
+  .newsletter-container p {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+  
+  .newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .newsletter-form .form-control {
+    height: 55px;
+    border-radius: 30px;
+    padding-left: 20px;
+    padding-right: 150px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+  }
+  
+  .newsletter-form .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 121, 107, 0.25);
+    border-color: #00796b;
+  }
+  
+  /* Make the button selector more specific to avoid conflicts */
+  .newsletter-section .subscribe-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 45px;
+    border-radius: 25px;
+    background-color: #00796b;
+    border-color: #00796b;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .newsletter-section .subscribe-btn:hover,
+  .newsletter-section .subscribe-btn:focus {
+    background-color: #005a4f;
+    border-color: #005a4f;
+  }
+  
+  .privacy-note {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #999;
+  }
+  
+  .alert {
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 767px) {
+    .newsletter-section {
+      padding: 60px 0;
+    }
+  
+    .newsletter-container {
+      padding: 40px 20px;
+    }
+  
+    .newsletter-icon {
+      width: 70px;
+      height: 70px;
+      font-size: 1.8rem;
+    }
+  
+    .newsletter-container h2 {
+      font-size: 1.8rem;
+    }
+  
+    .newsletter-container p {
+      font-size: 1rem;
+    }
+  
+    .newsletter-form {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .newsletter-form .form-control {
+      padding-right: 20px;
+    }
+  
+    .newsletter-section .subscribe-btn {
+      position: static;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 575px) {
+    .newsletter-section {
+      padding: 50px 0;
+    }
+  
+    .newsletter-container {
+      padding: 30px 15px;
+    }
+  
+    .newsletter-icon {
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+    }
+  
+    .newsletter-container h2 {
+      font-size: 1.5rem;
+    }
+  }
+  

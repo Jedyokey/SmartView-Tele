@@ -19,31 +19,31 @@
   }
   
   /* Main Footer Section */
-  .footer-main {
+  .footer .footer-main {
     padding: 60px 0 40px;
     position: relative;
     z-index: 1;
   }
   
-  .container {
+  .footer .container {
     padding-left: 15px;
     padding-right: 15px;
   }
   
   /* Footer Logo */
-  .footer-logo h2 {
+  .footer .footer-logo h2 {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 15px;
     color: #fff;
   }
   
-  .footer-logo span {
+  .footer .footer-logo span {
     color: #ffb300;
     font-weight: 700;
   }
   
-  .footer-about {
+  .footer .footer-about {
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 20px;
     font-size: 0.95rem;
@@ -51,11 +51,11 @@
   }
   
   /* Footer Columns */
-  .footer-column {
+  .footer .footer-column {
     margin-bottom: 30px;
   }
   
-  .footer-column h4 {
+  .footer .footer-column h4 {
     color: #fff;
     font-size: 1.2rem;
     margin-bottom: 20px;
@@ -64,7 +64,7 @@
     padding-bottom: 10px;
   }
   
-  .footer-column h4::after {
+  .footer .footer-column h4::after {
     content: '';
     position: absolute;
     left: 0;
@@ -76,17 +76,17 @@
   }
   
   /* Footer Links */
-  .footer-links {
+  .footer .footer-links {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .footer-links li {
+  .footer .footer-links li {
     margin-bottom: 10px;
   }
   
-  .footer-links a {
+  .footer .footer-links a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -94,19 +94,19 @@
     display: inline-block;
   }
   
-  .footer-links a:hover {
+  .footer .footer-links a:hover {
     color: #ffb300;
     transform: translateX(5px);
   }
   
   /* Contact Info */
-  .footer-contact {
+  .footer .footer-contact {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .footer-contact li {
+  .footer .footer-contact li {
     display: flex;
     align-items: flex-start;
     margin-bottom: 15px;
@@ -114,7 +114,7 @@
     font-size: 0.95rem;
   }
   
-  .contact-icon {
+  .footer .contact-icon {
     margin-right: 10px;
     font-size: 1.1rem;
     color: #00796b;
@@ -122,28 +122,28 @@
     margin-top: 3px;
   }
   
-  .contact-icon.whatsapp {
+  .footer .contact-icon.whatsapp {
     color: #25D366;
   }
   
-  .footer-contact a {
+  .footer .footer-contact a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     transition: all 0.3s ease;
   }
   
-  .footer-contact a:hover {
+  .footer .footer-contact a:hover {
     color: #ffb300;
   }
   
   /* Newsletter */
-  .newsletter-form {
+  .footer .newsletter-form {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
   }
   
-  .newsletter-form .form-control {
+  .footer .newsletter-form .form-control {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
     color: #fff;
@@ -152,16 +152,16 @@
     margin-bottom: 10px;
   }
   
-  .newsletter-form .form-control::placeholder {
+  .footer .newsletter-form .form-control::placeholder {
     color: rgba(255, 255, 255, 0.5);
   }
   
-  .newsletter-form .form-control:focus {
+  .footer .newsletter-form .form-control:focus {
     background-color: rgba(255, 255, 255, 0.15);
     box-shadow: none;
   }
   
-  .subscribe-btn {
+  .footer .subscribe-btn {
     background-color: #00796b;
     border: none;
     padding: 10px 15px;
@@ -170,29 +170,29 @@
     font-weight: 500;
   }
   
-  .subscribe-btn:hover {
+  .footer .subscribe-btn:hover {
     background-color: #005a4f;
     transform: translateY(-2px);
   }
   
   /* Social Icons */
-  .social-icons {
+  .footer .social-icons {
     margin-top: 25px;
   }
   
-  .social-icons h5 {
+  .footer .social-icons h5 {
     font-size: 1rem;
     margin-bottom: 15px;
     color: #fff;
   }
   
-  .social-links {
+  .footer .social-links {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
   }
   
-  .social-icon {
+  .footer .social-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,30 +205,30 @@
     text-decoration: none;
   }
   
-  .social-icon:hover {
+  .footer .social-icon:hover {
     background-color: #00796b;
     color: #fff;
     transform: translateY(-3px);
   }
   
   /* Language Selector */
-  .language-selector {
+  .footer .language-selector {
     margin-top: 20px;
   }
   
-  .language-toggle {
+  .footer .language-toggle {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
   }
   
-  .language-toggle span {
+  .footer .language-toggle span {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.95rem;
   }
   
-  .language-btn {
+  .footer .language-btn {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
     color: rgba(255, 255, 255, 0.7);
@@ -242,57 +242,57 @@
     gap: 5px;
   }
   
-  .language-btn:hover {
+  .footer .language-btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
   
-  .language-btn.active {
+  .footer .language-btn.active {
     background-color: #00796b;
     color: #fff;
   }
   
   /* Footer Bottom */
-  .footer-bottom {
+  .footer .footer-bottom {
     background-color: rgba(0, 0, 0, 0.2);
     padding: 20px 0;
     position: relative;
     z-index: 1;
   }
   
-  .copyright p {
+  .footer .copyright p {
     margin: 0;
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.6);
   }
   
-  .developer-credit {
+  .footer .developer-credit {
     text-align: right;
   }
   
-  .developer-info {
+  .footer .developer-info {
     display: inline-block;
   }
   
-  .developer-info p {
+  .footer .developer-info p {
     margin: 0 0 5px 0;
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.6);
     display: inline-block;
   }
   
-  .developer-info p::after {
+  .footer .developer-info p::after {
     content: '❤️';
     margin-left: 5px;
     animation: heartbeat 1.5s infinite;
   }
   
-  .developer-contact {
+  .footer .developer-contact {
     display: flex;
     gap: 15px;
     justify-content: flex-end;
   }
   
-  .developer-contact a {
+  .footer .developer-contact a {
     color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
     font-size: 0.85rem;
@@ -302,16 +302,16 @@
     transition: all 0.3s ease;
   }
   
-  .developer-contact a:hover {
+  .footer .developer-contact a:hover {
     color: #ffb300;
   }
   
-  .dev-icon {
+  .footer .dev-icon {
     font-size: 0.9rem;
     color: #00796b;
   }
   
-  .dev-icon.whatsapp {
+  .footer .dev-icon.whatsapp {
     color: #25D366;
   }
   
@@ -323,96 +323,96 @@
   
   /* Responsive Styles */
   @media (max-width: 991px) {
-    .footer-main {
+    .footer .footer-main {
       padding: 50px 0 30px;
     }
     
-    .footer-column {
+    .footer .footer-column {
       margin-bottom: 40px;
     }
   }
   
   @media (max-width: 767px) {
-    .footer-column h4 {
+    .footer .footer-column h4 {
       margin-bottom: 15px;
     }
     
-    .developer-credit {
+    .footer .developer-credit {
       text-align: center;
     }
     
-    .developer-contact {
+    .footer .developer-contact {
       justify-content: center;
     }
     
-    .copyright p {
+    .footer .copyright p {
       text-align: center;
     }
     
-    .social-links {
+    .footer .social-links {
       justify-content: center;
     }
     
-    .language-toggle {
+    .footer .language-toggle {
       justify-content: center;
     }
   }
   
   @media (max-width: 575px) {
-    .footer-main {
+    .footer .footer-main {
       padding: 40px 0 20px;
     }
     
-    .footer-logo h2 {
+    .footer .footer-logo h2 {
       font-size: 1.8rem;
       text-align: center;
     }
     
-    .footer-about {
+    .footer .footer-about {
       text-align: center;
     }
     
-    .footer-column h4 {
+    .footer .footer-column h4 {
       text-align: center;
     }
     
-    .footer-column h4::after {
+    .footer .footer-column h4::after {
       left: 50%;
       transform: translateX(-50%);
     }
     
-    .footer-links {
+    .footer .footer-links {
       text-align: center;
     }
     
-    .footer-links a:hover {
+    .footer .footer-links a:hover {
       transform: none;
     }
     
-    .footer-contact li {
+    .footer .footer-contact li {
       justify-content: center;
       text-align: center;
       flex-direction: column;
       align-items: center;
     }
     
-    .contact-icon {
+    .footer .contact-icon {
       margin-right: 0;
       margin-bottom: 5px;
       font-size: 1.3rem;
     }
     
-    .newsletter-form {
+    .footer .newsletter-form {
       max-width: 280px;
       margin-left: auto;
       margin-right: auto;
     }
     
-    .social-icons h5 {
+    .footer .social-icons h5 {
       text-align: center;
     }
     
-    .developer-contact {
+    .footer .developer-contact {
       flex-direction: column;
       gap: 8px;
       align-items: center;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Accordion } from 'react-bootstrap';
 import faqCategories from './faqCategories';
+import { useNavigate } from 'react-router-dom'; 
 import './FAQs.css';
 
 const FAQs = () => {
@@ -130,17 +131,22 @@ const FAQContent = ({ categories, activeCategory }) => (
 );
 
 // Contact Section Component
-const ContactSection = () => (
-  <Row className="justify-content-center">
-    <Col xs={12} md={8} lg={6} className="text-center contact-section">
-      <h3>Still have questions?</h3>
-      <p>Our customer support team is here to help you with any questions about our products and services.</p>
-      <div className="contact-buttons">
-        <button className="btn btn-primary">Chat with Us</button>
-        <button className="btn btn-outline-primary">Email Support</button>
-      </div>
-    </Col>
-  </Row>
-);
+const ContactSection = () => {
+  const navigate = useNavigate(); 
+  
+  return (
+      <Row className="justify-content-center">
+      <Col xs={12} md={8} lg={6} className="text-center contact-section">
+        <h3>Still have questions?</h3>
+        <p>Our customer support team is here to help you with any questions about our products and services.</p>
+        <div className="contact-buttons">
+          <button className="btn btn-primary" onClick={() => navigate('/contact')}>
+            Chat with Us
+          </button>
+        </div>
+      </Col>
+    </Row>
+  )
+};
 
 export default FAQs;

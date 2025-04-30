@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <rect width="300" height="300" fill="#f5f7fa"/>
+  <g>
+    <rect x="50" y="80" width="200" height="140" rx="12" ry="12" fill="#dfe6e9" stroke="#b2bec3" stroke-width="3"/>
+    <polygon points="50,220 150,130 250,220" fill="#b2bec3"/>
+    <text x="150" y="260" font-family="Poppins, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#636e72">
+      No Product Image
+    </text>
+  </g>
+</svg>

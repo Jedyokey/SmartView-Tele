@@ -158,7 +158,7 @@ const Contact = () => {
 
   // Redirect to WhatsApp
   const redirectToWhatsApp = () => {
-    const phoneNumber = '+2250505050505'; // Replace with actual seller's WhatsApp number
+    const phoneNumber = '+2250575965968'; // Replace with actual seller's WhatsApp number
     const message = `Hello, my name is ${formData.name}. ${formData.message}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${encodedMessage}`;
@@ -205,8 +205,8 @@ const Contact = () => {
                 <FaPhone />
               </div>
               <h3>Call Us</h3>
-              <p><a href="tel:+2250707070707">+225 07 0707 0707</a></p>
-              <p>Mon-Fri: 9am - 7pm</p>
+              <p><a href="tel:+2250707070707">+225 05 7596 5968</a></p>
+              <p>Mon-Sat: 7am - 7pm</p>
             </Col>
             
             <Col lg={4} md={12} className="contact-info-item">
@@ -214,7 +214,7 @@ const Contact = () => {
                 <FaEnvelope />
               </div>
               <h3>Email Us</h3>
-              <p><a href="mailto:info@smartviewtele.com">info@smartviewtele.com</a></p>
+              <p><a href="mailto:info@smartviewtele.com">isrealokeyonyeze@gmail.com</a></p>
               <p>We'll respond within 24 hours</p>
             </Col>
           </Row>
@@ -396,7 +396,7 @@ const Contact = () => {
                     variant="success" 
                     className="whatsapp-btn"
                     onClick={() => {
-                      const phoneNumber = '+2250505050505'; // Replace with actual seller's WhatsApp number
+                      const phoneNumber = '+2250575965968'; // Replace with actual seller's WhatsApp number
                       const message = encodeURIComponent('Hello, I am interested in your Smart TVs.');
                       window.open(`https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${message}`, '_blank');
                     }}
@@ -407,8 +407,8 @@ const Contact = () => {
                   <div className="business-hours">
                     <h3>Business Hours</h3>
                     <ul>
-                      <li><span>Monday - Friday:</span> 9:00 AM - 7:00 PM</li>
-                      <li><span>Saturday:</span> 10:00 AM - 5:00 PM</li>
+                      <li><span>Monday - Saturday:</span> 7:00 AM - 7:00 PM</li>
+                      {/* <li><span>Saturday:</span> 7:00 AM - 5:00 PM</li> */}
                       <li><span>Sunday:</span> Closed</li>
                     </ul>
                   </div>

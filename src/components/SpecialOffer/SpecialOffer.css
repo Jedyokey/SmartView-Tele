@@ -1,0 +1,166 @@
+.special-offer-section {
+    margin: 80px 0;
+    background-color: white;
+  }
+  
+  .offer-image {
+    height: 450px; /* Reduced height */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .offer-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .offer-content {
+    background: linear-gradient(135deg, #001c29 0%, #003545 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto; /* Reduced height to match image */
+  }
+  
+  .offer-content-inner {
+    max-width: 500px;
+    padding: 40px;
+  }
+  
+  .offer-badge {
+    display: inline-block;
+    background-color: #ffb300;
+    color: #001c29;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .offer-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px; /* Reduced margin */
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  
+  .offer-description {
+    font-size: 1.1rem;
+    margin-bottom: 20px; /* Reduced margin */
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  
+  .discount-highlight {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px; /* Reduced padding */
+    margin-bottom: 20px; /* Reduced margin */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .discount-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffb300;
+  }
+  
+  .discount-period {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  
+  .offer-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px; /* Reduced margin */
+  }
+  
+  .offer-features li {
+    padding: 6px 0; /* Reduced padding */
+    position: relative;
+    padding-left: 25px;
+  }
+  
+  .offer-features li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #ffb300;
+    font-weight: bold;
+  }
+  
+  .shop-offer-btn {
+    display: inline-block;
+    background-color: #00796b;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #00796b;
+  }
+  
+  .shop-offer-btn:hover {
+    background-color: transparent;
+    color: white;
+    border-color: white;
+  }
+  
+  @media (max-width: 991px) {
+    .offer-image,
+    .offer-content {
+      height: auto;
+    }
+  
+    .offer-content-inner {
+      padding: 40px 20px;
+      max-width: 100%;
+    }
+  
+    .offer-content h2 {
+      font-size: 2rem;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .special-offer-section {
+      margin: 50px 0;
+    }
+  
+    .offer-content h2 {
+      font-size: 1.8rem;
+    }
+  
+    .offer-description {
+      font-size: 1rem;
+    }
+  
+    .discount-value {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 575px) {
+    .special-offer-section {
+      margin: 40px 0;
+    }
+  
+    .offer-content h2 {
+      font-size: 1.5rem;
+    }
+  
+    .offer-content-inner {
+      padding: 30px 15px;
+    }
+  }
+  

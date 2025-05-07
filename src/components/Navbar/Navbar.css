@@ -88,15 +88,15 @@
 
 @media (max-width: 768px) {
   .custom-container {
-    padding-left: 1rem; /* Mobile left padding */
-    padding-right: 1rem; /* Mobile right padding */
+    padding-left: 1rem; 
+    padding-right: 1rem;
   }
 }
 
 @media (max-width: 576px) {
   .custom-container {
-    padding-left: 0.75rem; /* Small mobile left padding */
-    padding-right: 0.75rem; /* Small mobile right padding */
+    padding-left: 0.75rem; 
+    padding-right: 0.75rem; 
   }
 }
 /* ==================== */
@@ -400,7 +400,6 @@
 }
 
 /* Responsive adjustments */
-/* ==================== */
 
 /* ================================== */
 /* SMALL DESKTOP (992px - 1190px) - NEW STYLES */
@@ -569,7 +568,7 @@
   /* Make mobile search bar sticky too */
   .mobile-search-container {
     position: sticky !important;
-    top: 60px !important; /* Height of navbar */
+    top: 60px !important; 
     z-index: 1029 !important;
     background: white !important;
   }
@@ -603,7 +602,7 @@
 
   /* Smaller hamburger icon */
   .navbar-toggler {
-    padding: 0.25rem 0.35rem !important; /* Reduced from Bootstrap's default */
+    padding: 0.25rem 0.35rem !important; 
     border: none !important;
     margin-right: 0.1rem;
     border-radius: 50% !important;
@@ -611,7 +610,7 @@
 
   /* Custom hamburger bars */
   .navbar-toggler-icon {
-    width: 1.1em !important; /* Slimmer bars */
+    width: 1.1em !important; 
     height: 1.1em !important;
     transition: all 0.2s ease;
   }
@@ -622,7 +621,7 @@
   }
 
   .mobile-nav-section {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important; /* Darker subtle divider */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important; 
   }
 
   /* For section titles */

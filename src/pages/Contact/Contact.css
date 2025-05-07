@@ -68,6 +68,7 @@
     border-radius: 10px;
     transition: all 0.3s ease;
     height: 100%;
+    min-height: 380px; /* or whatever fits your design */
   }
   
   .contact-info-item:hover {
@@ -115,6 +116,21 @@
   
   .contact-info-item a:hover {
     color: #ffb300;
+  }
+
+  .store-extra-info {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+  .store-extra-info h5 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
   }
   
   /* Contact Form Section */
@@ -314,17 +330,17 @@
   }
   
   .social-icon:nth-child(1):hover {
-    background-color: #3b5998;
+    background-color: #1877F2;
     color: white;
   }
   
   .social-icon:nth-child(2):hover {
-    background-color: #1da1f2;
+    background-color: #E1306C;
     color: white;
   }
   
   .social-icon:nth-child(3):hover {
-    background-color: #e1306c;
+    background-color: #69C9D0;
     color: white;
   }
   
@@ -408,6 +424,7 @@
     
     .contact-info-item {
       margin-bottom: 30px;
+      min-height: unset;
     }
     
     .map-container {

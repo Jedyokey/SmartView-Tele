@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { Container, Nav, Navbar, Form, FormControl } from "react-bootstrap"
+import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
 import "./Navbar.css"
 import logo from "../../assets/smartview-pro-logo-2.png"
 import LanguageToggle from "../LanguageToggle/LanguageToggle"
 
 const Navigation = () => {
+  const navigate = useNavigate()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
 
   // Check screen size on mount and resize
   useEffect(() => {
@@ -36,13 +39,30 @@ const Navigation = () => {
     document.body.style.overflow = "auto"
   }
 
+  const handleSearch = (e) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`)
+      setSearchQuery("")
+      closeMobileMenu()
+    }
+  }
+
+  const handleSearchIconClick = () => {
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`)
+      setSearchQuery("")
+      closeMobileMenu()
+    }
+  }
+
   return (
     <>
       <Navbar expand="lg" className="main-navbar py-2">
         <Container className="custom-container">
           {/* Logo - always visible */}
           <Navbar.Brand href="/" className="brand-logo">
-            <img src={logo || "/placeholder.svg"} alt="SmartView Tele" className="logo-img" />
+            <img src={logo || "/placeholder.svg"} alt="SmartView Tele Logo" className="logo-img" />
             <span className="brand-text">
               Smart<span className="view-text">View</span>
               <span className="tele-text">Télé</span>
@@ -51,10 +71,22 @@ const Navigation = () => {
 
           {/* Tablet Search Bar - Only visible on tablet */}
           {isTablet && (
-            <Form className="d-flex tablet-search-form">
+            <Form className="d-flex tablet-search-form" onSubmit={handleSearch}>
               <div className="search-wrapper">
-                <FormControl type="search" placeholder="Search..." aria-label="Search" />
-                <i className="fas fa-search tablet-search-icon" role="button" tabIndex="0"></i>
+                <FormControl
+                  type="search"
+                  placeholder="Search..."
+                  aria-label="Search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <i
+                  className="fas fa-search tablet-search-icon"
+                  role="button"
+                  tabIndex="0"
+                  onClick={handleSearchIconClick}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearchIconClick()}
+                ></i>
               </div>
             </Form>
           )}
@@ -95,9 +127,22 @@ const Navigation = () => {
 
             {/* Desktop Search Form - Only visible on desktop */}
             {!isTablet && !isMobile && (
-              <Form className="d-flex search-form">
-                <FormControl type="search" placeholder="Search Smart TVs..." className="me-5" aria-label="Search" />
-                <i className="fas fa-search search-icon" role="button" tabIndex="0"></i>
+              <Form className="d-flex search-form" onSubmit={handleSearch}>
+                <FormControl
+                  type="search"
+                  placeholder="Search Smart TVs..."
+                  className="me-5"
+                  aria-label="Search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <i
+                  className="fas fa-search search-icon"
+                  role="button"
+                  tabIndex="0"
+                  onClick={handleSearchIconClick}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearchIconClick()}
+                ></i>
               </Form>
             )}
           </Navbar.Collapse>
@@ -107,10 +152,22 @@ const Navigation = () => {
       {/* Mobile Search Bar - Only visible on mobile */}
       {isMobile && (
         <div className="mobile-search-container">
-          <Form className="d-flex mobile-search-form">
+          <Form className="d-flex mobile-search-form" onSubmit={handleSearch}>
             <div className="search-wrapper">
-              <FormControl type="search" placeholder="Search..." aria-label="Search" />
-              <i className="fas fa-search mobile-search-icon" role="button" tabIndex="0"></i>
+              <FormControl
+                type="search"
+                placeholder="Search..."
+                aria-label="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <i
+                className="fas fa-search mobile-search-icon"
+                role="button"
+                tabIndex="0"
+                onClick={handleSearchIconClick}
+                onKeyDown={(e) => e.key === "Enter" && handleSearchIconClick()}
+              ></i>
             </div>
           </Form>
         </div>
@@ -123,11 +180,16 @@ const Navigation = () => {
           <div className={`mobile-menu ${mobileMenuOpen ? "active" : ""}`} id="mobile-menu">
             <div className="mobile-menu-header">
               <div className="mobile-brand">
-                <img src={logo} alt="" className="mobile-logo-img" />
-                <span className="brand-text">
-                  Smart<span className="view-text">View</span>
-                  <span className="tele-text">Télé</span>
-                </span>
+                {/* Logo in Mobile Menu Header */}
+                <Link to="/" onClick={closeMobileMenu} className="mobile-logo-link">
+                  <div className="mobile-logo-wrapper">
+                    <img src={logo || "/placeholder.svg"} alt="SmartView Télé Logo" className="mobile-logo-img" />
+                    <span className="brand-text">
+                      Smart<span className="view-text">View</span>
+                      <span className="tele-text">Télé</span>
+                    </span>
+                  </div>
+                </Link>
               </div>
               <button className="mobile-menu-close" onClick={closeMobileMenu}>
                 <i className="fas fa-times"></i>
@@ -135,6 +197,24 @@ const Navigation = () => {
             </div>
 
             <div className="mobile-menu-content">
+              {/* Mobile Search Form in Menu */}
+              <div className="mobile-menu-search">
+                <Form onSubmit={handleSearch}>
+                  <div className="search-wrapper">
+                    <FormControl
+                      type="search"
+                      placeholder="Search products..."
+                      aria-label="Search"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button type="submit" className="mobile-menu-search-btn">
+                      <i className="fas fa-search"></i>
+                    </button>
+                  </div>
+                </Form>
+              </div>
+
               {/* Main Navigation Links with Arrows */}
               <div className="mobile-nav-section">
                 <NavLink to="/" className="mobile-nav-item" onClick={closeMobileMenu}>
@@ -183,17 +263,17 @@ const Navigation = () => {
                 <h3 className="mobile-section-title">Get in touch</h3>
                 <div className="mobile-section-links">
                   <a href="tel:+1234567890" className="mobile-section-link">
-                    <i className="fas fa-phone-alt me-2"></i> +1 234 567 890
+                    <i className="fas fa-phone-alt me-2"></i> +225 05 7596 5968
                   </a>
                   <div className="mobile-social-links">
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                      <i className="fab fa-twitter"></i>
+                      <FaFacebookF />
                     </a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                      <i className="fab fa-instagram"></i>
+                      <FaInstagram />
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+                      <FaTiktok />
                     </a>
                   </div>
                 </div>

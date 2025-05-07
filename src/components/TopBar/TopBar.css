@@ -19,6 +19,12 @@
   font-size: 1rem; 
 }
 
+.top-socials i,
+.top-socials svg {
+  font-size: 1rem; 
+}
+
+
 /* ===== TABLET FIX (769px-991px) - MINIMAL ADJUSTMENT ===== */
 @media (min-width: 769px) and (max-width: 991px) {
   .top-bar {

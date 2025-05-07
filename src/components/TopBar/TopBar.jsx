@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import LanguageToggle from '../LanguageToggle/LanguageToggle';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import { SiTiktok } from 'react-icons/si';
 import './TopBar.css';
 
 const TopBar = () => {
@@ -13,13 +15,13 @@ const TopBar = () => {
           </Col>
           <Col xs={6} className="d-flex justify-content-end top-socials">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="mx-2">
-              <i className="fab fa-facebook-f"></i>
+              <FaFacebookF />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="mx-2">
-              <i className="fab fa-twitter"></i>
+            <a href="https://www.tiktok.com/@yourhandle" target="_blank" rel="noopener noreferrer" className="mx-2">
+              <SiTiktok />
             </a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mx-2">
-              <i className="fab fa-instagram"></i>
+              <FaInstagram />
             </a>
           </Col>
         </Row>

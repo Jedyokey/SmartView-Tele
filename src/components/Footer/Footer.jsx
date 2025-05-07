@@ -1,79 +1,127 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaWhatsapp, FaPhone, FaEnvelope, FaMapMarkerAlt, FaGlobe } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
+import { 
+  FaFacebookF, 
+  FaInstagram, 
+  FaWhatsapp, 
+  FaPhone, 
+  FaEnvelope, 
+  FaMapMarkerAlt, 
+  FaGlobe, 
+  FaCheckCircle 
+} from 'react-icons/fa';
+import { SiTiktok } from "react-icons/si";
+import logo from '../../assets/smartview-pro-logo-2.png'; // Replace with your logo path
 import './Footer.css';
 
 const Footer = () => {
   const [language, setLanguage] = useState('en'); // Default language is English
+  const [email, setEmail] = useState("");
+  const [validated, setValidated] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   // Content in both languages
   const content = {
     en: {
-      quickLinks: 'Quick Links',
+      info: 'Info',
       aboutUs: 'About Us',
-      products: 'Products',
-      services: 'Services',
-      blog: 'Blog',
       contactUs: 'Contact Us',
-      support: 'Support',
+      faqs: 'FAQs',
       categories: 'Categories',
       smartTVs: 'Smart TVs',
-      accessories: 'Accessories',
-      homeTheater: 'Home Theater',
-      soundSystems: 'Sound Systems',
-      mountingKits: 'Mounting Kits',
-      remoteControls: 'Remote Controls',
       contactInfo: 'Contact Information',
-      address: 'Abidjan, Cocody, Ivory Coast',
+      address: 'Rue Nimlin Fax-Clark, Adjame, Abidjan, Côte d\'Ivoire',
       callUs: 'Call Us',
       emailUs: 'Email Us',
-      email: 'info@smartviewtele.com',
+      email: 'isrealokeyonyeze@gmail.com',
       followUs: 'Follow Us',
       newsletter: 'Newsletter',
       subscribeText: 'Subscribe to receive updates on new products and special promotions',
       emailPlaceholder: 'Your email address',
       subscribe: 'Subscribe',
-      copyright: '© 2023 SmartView Télé. All rights reserved.',
+      copyright: '© 2025 SmartView Télé. All rights reserved.',
       developedBy: 'Developed by Jedy++',
       language: 'Language',
       english: 'English',
-      french: 'French'
+      french: 'French',
+      modalThankYou: "Thank You!",
+      modalMessage:
+        "You have successfully subscribed to SmartView Télé's newsletter. Stay tuned for exciting updates!",
+      close: "Close",
     },
     fr: {
-      quickLinks: 'Liens Rapides',
+      info: 'Liens Rapides',
       aboutUs: 'À Propos',
-      products: 'Produits',
-      services: 'Services',
-      blog: 'Blog',
       contactUs: 'Contactez-Nous',
-      support: 'Support',
+      faqs: 'FAQ',
       categories: 'Catégories',
       smartTVs: 'Télévisions Intelligentes',
-      accessories: 'Accessoires',
-      homeTheater: 'Home Cinéma',
-      soundSystems: 'Systèmes Audio',
-      mountingKits: 'Kits de Montage',
-      remoteControls: 'Télécommandes',
       contactInfo: 'Informations de Contact',
-      address: 'Abidjan, Cocody, Côte d\'Ivoire',
+      address: 'Rue Nimlin Fax-Clark, Adjame, Abidjan, Côte d\'Ivoire',
       callUs: 'Appelez-Nous',
       emailUs: 'Envoyez-Nous un Email',
-      email: 'info@smartviewtele.com',
+      email: 'isrealokeyonyeze@gmail.com',
       followUs: 'Suivez-Nous',
       newsletter: 'Bulletin d\'Information',
       subscribeText: 'Abonnez-vous pour recevoir des mises à jour sur les nouveaux produits et les promotions spéciales',
       emailPlaceholder: 'Votre adresse email',
       subscribe: 'S\'abonner',
-      copyright: '© 2023 SmartView Télé. Tous droits réservés.',
+      copyright: '© 2025 SmartView Télé. Tous droits réservés.',
       developedBy: 'Développé par Jedy++',
       language: 'Langue',
       english: 'Anglais',
-      french: 'Français'
+      french: 'Français',
+      modalThankYou: "Merci !",
+      modalMessage:
+        "Vous êtes abonné avec succès au bulletin d'information de SmartView Télé. Restez à l'écoute pour des mises à jour passionnantes !",
+      close: "Fermer",
     }
   };
 
   // Current language content
   const t = content[language];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+      setValidated(true);
+      return;
+    }
+
+    setValidated(true);
+    setLoading(true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "c24dc6ef-8062-4b51-9a87-a59e90a306e3", // Replace with your actual key
+          email: email,
+          subject: "New Newsletter Subscription",
+          from_name: "SmartView Télé Newsletter",
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setShowModal(true);
+        setEmail("");
+        setValidated(false);
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <footer className="footer">
@@ -83,8 +131,9 @@ const Footer = () => {
           <Row>
             {/* Company Info */}
             <Col lg={3} md={6} sm={12} className="footer-column">
-              <div className="footer-logo">
-                <h2>SmartView <span>Télé</span></h2>
+              <div className="footer-logo d-flex align-items-center">
+                <img src={logo || "/placeholder.svg"} alt="SmartView Tele Logo" className="logo-img" />
+                <h2 className="mb-0">SmartView <span>Télé</span></h2>
               </div>
               <p className="footer-about">
                 {language === 'en' 
@@ -110,34 +159,19 @@ const Footer = () => {
               </div>
             </Col>
 
-            {/* Quick Links */}
+            {/* Info */}
             <Col lg={2} md={6} sm={6} className="footer-column">
-              <h4>{t.quickLinks}</h4>
+              <h4>{t.info}</h4>
               <ul className="footer-links">
-                <li><a href="#">{t.aboutUs}</a></li>
-                <li><a href="#">{t.products}</a></li>
-                <li><a href="#">{t.services}</a></li>
-                <li><a href="#">{t.blog}</a></li>
-                <li><a href="#">{t.contactUs}</a></li>
-                <li><a href="#">{t.support}</a></li>
+                <li><Link to="/about">{t.aboutUs}</Link></li>
+                <li><Link to="/smart-tvs">{t.smartTVs}</Link></li>
+                <li><Link to="/contact">{t.contactUs}</Link></li>
+                <li><Link to="/faqs">{t.faqs}</Link></li>
               </ul>
             </Col>
 
-            {/* Categories */}
-            <Col lg={2} md={6} sm={6} className="footer-column">
-              <h4>{t.categories}</h4>
-              <ul className="footer-links">
-                <li><a href="#">{t.smartTVs}</a></li>
-                <li><a href="#">{t.accessories}</a></li>
-                <li><a href="#">{t.homeTheater}</a></li>
-                <li><a href="#">{t.soundSystems}</a></li>
-                <li><a href="#">{t.mountingKits}</a></li>
-                <li><a href="#">{t.remoteControls}</a></li>
-              </ul>
-            </Col>
-
-            {/* Contact Info */}
-            <Col lg={2} md={6} sm={6} className="footer-column">
+            {/* Contact Information */}
+            <Col lg={4} md={6} sm={6} className="footer-column">
               <h4>{t.contactInfo}</h4>
               <ul className="footer-contact">
                 <li>
@@ -146,37 +180,63 @@ const Footer = () => {
                 </li>
                 <li>
                   <FaPhone className="contact-icon" />
-                  <span>{t.callUs}: <a href="tel:+2250707070707">+225 07 0707 0707</a></span>
+                  <span>{t.callUs}: <a href="tel:+2250575965968">+225 05 7596 5968</a></span>
                 </li>
                 <li>
                   <FaWhatsapp className="contact-icon whatsapp" />
-                  <span>WhatsApp: <a href="https://wa.me/2250505050505">+225 05 0505 0505</a></span>
+                  <span>WhatsApp: <a href="https://wa.me/2250575965968">+225 05 7596 5968</a></span>
                 </li>
                 <li>
                   <FaEnvelope className="contact-icon" />
-                  <span>{t.emailUs}: <a href="mailto:info@smartviewtele.com">{t.email}</a></span>
+                  <span>{t.emailUs}: <a href="mailto:isrealokeyonyeze@gmail.com">{t.email}</a></span>
                 </li>
               </ul>
             </Col>
 
             {/* Newsletter */}
-            <Col lg={3} md={6} sm={12} className="footer-column">
+            <Col lg={3} md={6} sm={12} className="footer-column newsletter">
               <h4>{t.newsletter}</h4>
               <p>{t.subscribeText}</p>
-              <Form className="newsletter-form">
+              <Form 
+                className="newsletter-form"
+                noValidate
+                validated={validated}
+                onSubmit={handleSubmit}
+              >
                 <Form.Group>
-                  <Form.Control type="email" placeholder={t.emailPlaceholder} />
+                  <Form.Control 
+                    type="email" 
+                    name="email"
+                    placeholder={t.emailPlaceholder} 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    title="Please enter a valid email address"
+                    disabled={loading} 
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Please enter a valid email address.
+                  </Form.Control.Feedback>
                 </Form.Group>
-                <Button type="submit" className="subscribe-btn">{t.subscribe}</Button>
+                <Button type="submit" className="subscribe-btn" disabled={loading}>
+                  {/* {t.subscribe} */}
+                  {loading ? "Subscribing..." : t.subscribe}
+                </Button>
               </Form>
               <div className="social-icons">
-                <h5>{t.followUs}</h5>
+                <h5 className='social-text'>{t.followUs}</h5>
                 <div className="social-links">
                   <a href="#" className="social-icon"><FaFacebookF /></a>
-                  <a href="#" className="social-icon"><FaTwitter /></a>
                   <a href="#" className="social-icon"><FaInstagram /></a>
-                  <a href="#" className="social-icon"><FaYoutube /></a>
-                  <a href="#" className="social-icon"><FaWhatsapp /></a>
+                  <a 
+                    className="social-icon"
+                    href="https://www.tiktok.com/@yourhandle" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <SiTiktok />
+                  </a>
                 </div>
               </div>
             </Col>
@@ -195,11 +255,11 @@ const Footer = () => {
               <div className="developer-info">
                 <p>{t.developedBy}</p>
                 <div className="developer-contact">
-                  <a href="tel:+2250707070707">
-                    <FaPhone className="dev-icon" /> +225 07 0707 0707
+                  <a href="tel:+2250501436430">
+                    <FaPhone className="dev-icon" /> +225 05 0143 6430
                   </a>
-                  <a href="https://wa.me/2250505050505">
-                    <FaWhatsapp className="dev-icon whatsapp" /> +225 05 0505 0505
+                  <a href="https://wa.me/2250576183285">
+                    <FaWhatsapp className="dev-icon whatsapp" /> +225 05 7618 3285
                   </a>
                 </div>
               </div>
@@ -207,6 +267,23 @@ const Footer = () => {
           </Row>
         </Container>
       </div>
+
+      {/* ✅ Confirmation Modal */}
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        centered
+        className="success-modal"
+      >
+        <Modal.Body className="text-center">
+          <FaCheckCircle size={48} color="green" />
+          <h4 className="mt-3">{t.modalThankYou}</h4>
+          <p>{t.modalMessage}</p>
+          <Button variant="success" onClick={() => setShowModal(false)}>
+            {t.close}
+          </Button>
+        </Modal.Body>
+      </Modal>
     </footer>
   );
 };

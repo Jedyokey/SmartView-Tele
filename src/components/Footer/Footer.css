@@ -31,9 +31,20 @@
   }
   
   /* Footer Logo */
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  
+  .footer-logo img.logo-img {
+    width: 40px;
+    height: auto;
+    margin-top: 0;
+  }
+  
   .footer .footer-logo h2 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.5rem;
     margin-bottom: 15px;
     color: #fff;
   }
@@ -45,6 +56,7 @@
   
   .footer .footer-about {
     color: rgba(255, 255, 255, 0.7);
+    margin-top: 10px;
     margin-bottom: 20px;
     font-size: 0.95rem;
     line-height: 1.6;
@@ -171,19 +183,30 @@
   }
   
   .footer .subscribe-btn:hover {
-    background-color: #005a4f;
+    background-color: #005a4f !important;
     transform: translateY(-2px);
   }
   
   /* Social Icons */
   .footer .social-icons {
     margin-top: 25px;
+    display: flex;
+    align-items: center !important;
+    justify-content: flex-start;
   }
   
   .footer .social-icons h5 {
     font-size: 1rem;
     margin-bottom: 15px;
     color: #fff;
+    gap: 12px; /* add a little space between text and icons */
+    flex-wrap: wrap; /* in case on mobile it needs to wrap */
+  }
+
+  .footer .social-icons .social-text {
+    font-size: 1rem;
+    color: #fff;
+    margin: 0; /* REMOVE margin-bottom that was pushing icons down */
   }
   
   .footer .social-links {
@@ -194,10 +217,9 @@
   
   .footer .social-icon {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
+    align-items: center !important;
+    width: 35px;
+    height: 35px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     color: #fff;
@@ -210,6 +232,19 @@
     color: #fff;
     transform: translateY(-3px);
   }
+
+  /* Specific hover colors */
+.footer .social-icon:nth-child(1):hover {
+  background-color: #1877F2;
+}
+
+.footer .social-icon:nth-child(2):hover {
+  background-color: #E1306C;
+}
+
+.footer .social-icon:nth-child(3):hover {
+  background-color: #69C9D0;
+}
   
   /* Language Selector */
   .footer .language-selector {
@@ -362,10 +397,16 @@
     .footer .footer-main {
       padding: 40px 0 20px;
     }
+
+    .align-items-center {
+      align-items: center !important;
+      justify-content: center;
+  }
     
     .footer .footer-logo h2 {
       font-size: 1.8rem;
       text-align: center;
+      margin-left: -7px;
     }
     
     .footer .footer-about {
@@ -407,6 +448,27 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    .footer .newsletter p {
+      text-align: center;
+    }
+
+    .footer .subscribe-btn {
+      background-color: #00796b;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      margin-top: -15px;
+  }
+
+    .footer .social-icons {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center !important;
+  }
     
     .footer .social-icons h5 {
       text-align: center;

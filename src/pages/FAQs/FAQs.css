@@ -1,5 +1,3 @@
-/* FAQs Page Styling with Bright Colors */
-
 .faqs-page {
     background: linear-gradient(135deg, #f0f9ff 0%, #e4f1fe 100%);
     padding: 40px 0 80px;
@@ -50,7 +48,7 @@
     border-radius: 12px;
     padding: 25px;
     position: sticky;
-    top: 20px;
+    top: 100px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border-left: 5px solid #00796b;
   }
@@ -274,6 +272,11 @@
     .faqs-main-title {
       font-size: 3rem;
     }
+
+    .category-nav-inner {
+      position: sticky;
+      top: 170px;
+    }
     
     .category-title {
       font-size: 2rem;
@@ -283,6 +286,11 @@
   @media (max-width: 991px) {
     .faqs-main-title {
       font-size: 2.5rem;
+    }
+
+    .category-nav-inner {
+      position: sticky;
+      top: 150px;
     }
     
     .category-title {

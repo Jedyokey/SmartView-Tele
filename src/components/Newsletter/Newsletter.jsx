@@ -1,27 +1,30 @@
-import { useState } from "react"
-import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap"
-import { FaEnvelope, FaPaperPlane } from "react-icons/fa"
-import "./Newsletter.css"
+import { useState } from "react";
+import { Container, Row, Col, Form, Button, Alert, Modal } from "react-bootstrap";
+import { FaEnvelope, FaPaperPlane, FaCheckCircle } from "react-icons/fa";
+import "./Newsletter.css";
 
 const Newsletter = () => {
-  const [email, setEmail] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState(null)
-  const [validated, setValidated] = useState(false)
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [validated, setValidated] = useState(false);
+  const [showModal, setShowModal] = useState(false); 
+
+  const handleCloseModal = () => setShowModal(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const form = e.currentTarget
+    e.preventDefault();
+    const form = e.currentTarget;
 
     if (form.checkValidity() === false) {
-      e.stopPropagation()
-      setValidated(true)
-      return
+      e.stopPropagation();
+      setValidated(true);
+      return;
     }
 
-    setValidated(true)
-    setLoading(true)
-    setMessage(null)
+    setValidated(true);
+    setLoading(true);
+    setMessage(null);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -30,37 +33,38 @@ const Newsletter = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          access_key: "YOUR_WEB3FORMS_ACCESS_KEY", // Replace with your Web3Forms access key
+          access_key: "c24dc6ef-8062-4b51-9a87-a59e90a306e3", 
           email: email,
           subject: "New Newsletter Subscription",
           from_name: "SmartView Télé Newsletter",
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data.success) {
         setMessage({
           type: "success",
           text: "Thank you for subscribing to our newsletter!",
-        })
-        setEmail("")
-        setValidated(false)
+        });
+        setShowModal(true); // Show modal on success
+        setEmail("");
+        setValidated(false);
       } else {
         setMessage({
           type: "danger",
           text: "Something went wrong. Please try again.",
-        })
+        });
       }
     } catch (error) {
       setMessage({
         type: "danger",
         text: "An error occurred. Please try again later.",
-      })
+      });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <section className="newsletter-section">
@@ -74,8 +78,8 @@ const Newsletter = () => {
               <h2>Subscribe to Our Newsletter</h2>
               <p>Stay updated with our latest products, special offers, and TV technology news</p>
 
-              {message && (
-                <Alert variant={message.type} className="text-center">
+              {message && message.type === "danger" && (
+                <Alert variant="danger" className="text-center">
                   {message.text}
                 </Alert>
               )}
@@ -110,8 +114,20 @@ const Newsletter = () => {
           </Col>
         </Row>
       </Container>
-    </section>
-  )
-}
 
-export default Newsletter
+      {/* Modal for Thank You */}
+      <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal.Body className="text-center">
+          <FaCheckCircle size={70} className="text-success mb-3" />
+          <h4>Thank You!</h4>
+          <p>You have successfully subscribed to SmartView Télé's newsletter. Stay tuned for exciting updates!</p>
+          <Button variant="success" onClick={handleCloseModal} className="mt-3">
+            Close
+          </Button>
+        </Modal.Body>
+      </Modal>
+    </section>
+  );
+};
+
+export default Newsletter;

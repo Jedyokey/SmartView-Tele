@@ -14,14 +14,29 @@ const TopBar = () => {
             <LanguageToggle />
           </Col>
           <Col xs={6} className="d-flex justify-content-end top-socials">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="mx-2">
+            <a 
+              href="https://www.facebook.com/share/18RmyzRPdq/?mibextid=wwXIfr" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="mx-2"
+            >
               <FaFacebookF />
             </a>
-            <a href="https://www.tiktok.com/@yourhandle" target="_blank" rel="noopener noreferrer" className="mx-2">
-              <SiTiktok />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mx-2">
+            <a 
+              href="https://www.instagram.com/tele_adjame_isreal?igsh=MWdobG9ydzF4eHZueQ%3D%3D&utm_source=qr" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="mx-2"
+            >
               <FaInstagram />
+            </a>
+            <a 
+              href="https://www.tiktok.com/@isrealokey6?_t=ZM-8wESJbNhVLy&_r=1" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="mx-2"
+            >
+              <SiTiktok />
             </a>
           </Col>
         </Row>

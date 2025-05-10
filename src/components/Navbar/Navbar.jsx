@@ -266,13 +266,23 @@ const Navigation = () => {
                     <i className="fas fa-phone-alt me-2"></i> +225 05 7596 5968
                   </a>
                   <div className="mobile-social-links">
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                    <a 
+                      href="https://www.facebook.com/share/18RmyzRPdq/?mibextid=wwXIfr" target="_blank" 
+                      rel="noopener noreferrer"
+                    >
                       <FaFacebookF />
                     </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                    <a 
+                      href="https://www.instagram.com/tele_adjame_isreal?igsh=MWdobG9ydzF4eHZueQ%3D%3D&utm_source=qr" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
                       <FaInstagram />
                     </a>
-                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+                    <a 
+                      href="https://www.tiktok.com/@isrealokey6?_t=ZM-8wESJbNhVLy&_r=1" target="_blank" 
+                      rel="noopener noreferrer"
+                    >
                       <FaTiktok />
                     </a>
                   </div>

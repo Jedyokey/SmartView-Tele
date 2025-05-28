@@ -6,7 +6,7 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
+}        
 
 .hero-left {
   width: 40%;
@@ -72,30 +72,35 @@
   color: #555;
 }
 
-.shop-now-btn,
-.whatsapp-btn {
+.hero-left .shop-now-btn,
+.hero-left .whatsapp-btn {
   background-color: #00796b;
   color: white;
   border: none;
   padding: 12px 20px !important;
   margin: 10px 0;
   font-size: 1.1rem;
+  font-weight: normal !important;
   cursor: pointer;
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   border-radius: 8px;
   gap: 10px;
   transition: background-color 0.3s ease;
+  text-decoration: none !important;
 }
 
-.whatsapp-btn {
+.hero-left .whatsapp-btn {
   background-color: #25d366;
   padding: 12px 20px !important;
   width: auto !important;
+  gap: 6px !important;
+
 }
 
-.whatsapp-btn .icon {
-  margin-right: 10px !important;
+.hero-left .whatsapp-btn .icon {
+  margin-right: 1px !important;
 }
 
 .shop-now-btn:hover,
@@ -172,8 +177,8 @@
     font-size: 1.4rem;
   }
 
-  .shop-now-btn,
-  .whatsapp-btn {
+  .hero-left .shop-now-btn,
+  .hero-left .whatsapp-btn {
     padding: 14px 24px;
     font-size: 1.2rem;
   }
@@ -227,8 +232,8 @@
     margin-right: auto;
   }
 
-  .shop-now-btn,
-  .whatsapp-btn {
+  .hero-left .shop-now-btn,
+  .hero-left .whatsapp-btn {
     width: 80% !important;
     max-width: 400px !important;
     justify-content: center;
@@ -266,8 +271,8 @@
     margin-bottom: 20px;
   }
 
-  .shop-now-btn,
-  .whatsapp-btn {
+  .hero-left .shop-now-btn,
+  .hero-left .whatsapp-btn {
     width: 90% !important;
     font-size: 1rem;
     padding: 10px 16px;
@@ -317,8 +322,8 @@
     margin-bottom: 15px;
   }
 
-  .shop-now-btn,
-  .whatsapp-btn {
+  .hero-left .shop-now-btn,
+  .hero-left .whatsapp-btn {
     width: 100% !important;
     font-size: 0.9rem;
     padding: 10px 14px;
@@ -352,6 +357,7 @@
   .hero-left {
     width: 40%;
     padding: 20px;
+    height: auto; 
   }
 
   .hero-right {
@@ -369,8 +375,8 @@
     margin-bottom: 10px;
   }
 
-  .shop-now-btn,
-  .whatsapp-btn {
+  .hero-left .shop-now-btn,
+  .hero-left .whatsapp-btn {
     padding: 8px 12px;
     font-size: 0.9rem;
     margin: 5px 0;

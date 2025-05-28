@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { FaWhatsapp, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom'; 
-import './Hero.css';
-import hero_image from '../../assets/hero-image.png';
-import hero_image2 from '../../assets/hero_image2.png';
+import React, { useState, useEffect } from "react";
+import { FaWhatsapp, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useTVContext } from "../../context/TVContext";
+import "./Hero.css";
+import hero_image from "../../assets/hero-image.png";
+import hero_image2 from "../../assets/hero_image2.png";
 
 const images = [hero_image, hero_image2];
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const { language } = useTVContext(); // Sync language from global context
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language, i18n]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
@@ -28,27 +36,32 @@ const Hero = () => {
     );
   };
 
-  // WhatsApp settings
   const phoneNumber = "+2250575965968";
-  const whatsappMessage = "Hello! I'm interested in your Smart TVs. Can you assist me?";
+  const whatsappMessage = t("hero.whatsappMessage");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <div className="hero-container">
       <div className="hero-left">
         <h1>
-          Welcome to <span className="highlight-smart">SmartView</span>{' '}
+          {t("hero.welcome")}{" "}
+          <span className="highlight-smart">SmartView</span>{" "}
           <span className="highlight-tele">Télé</span>
         </h1>
-        <p>Your go-to place for the best Smart TVs!</p>
+        <p>{t("hero.subtitle")}</p>
 
-        <button className="shop-now-btn" onClick={() => navigate('/smart-tvs')}>
-          Shop Now
+        <button className="shop-now-btn" onClick={() => navigate("/smart-tvs")}>
+          {t("hero.shopNow")}
         </button>
 
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="whatsapp-btn">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatsapp-btn"
+        >
           <FaWhatsapp className="icon" />
-          Contact us on WhatsApp
+          {t("hero.contactWhatsApp")}
         </a>
       </div>
 
@@ -58,16 +71,16 @@ const Hero = () => {
             <img
               key={index}
               src={img}
-              alt={`Smart TV ${index + 1}`}
-              className={`fade-image ${index === currentIndex ? 'active' : ''}`}
+              alt={t("hero.imageAlt", { index: index + 1 })}
+              className={`fade-image ${index === currentIndex ? "active" : ""}`}
             />
           ))}
 
           <div className="nav-controls">
-            <button className="nav-btn prev" onClick={goToPrev}>
+            <button className="nav-btn prev" onClick={goToPrev} aria-label={t("hero.previous")}>
               <FaChevronLeft />
             </button>
-            <button className="nav-btn next" onClick={goToNext}>
+            <button className="nav-btn next" onClick={goToNext} aria-label={t("hero.next")}>
               <FaChevronRight />
             </button>
           </div>

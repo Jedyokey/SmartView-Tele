@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
 import { Link, NavLink, useNavigate } from "react-router-dom"
 import { Container, Nav, Navbar, Form, FormControl } from "react-bootstrap"
-import { FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa"
+import { useTranslation } from "react-i18next" 
+import { useTVContext } from "../../context/TVContext"
 import "./Navbar.css"
 import logo from "../../assets/smartview-pro-logo-2.png"
 import LanguageToggle from "../LanguageToggle/LanguageToggle"
@@ -12,6 +14,16 @@ const Navigation = () => {
   const [isTablet, setIsTablet] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+
+  const { language } = useTVContext()
+  const { t, i18n } = useTranslation()
+
+  // Sync i18next language with global language from context
+  useEffect(() => {
+    if (language !== i18n.language) {
+      i18n.changeLanguage(language)
+    }
+  }, [language, i18n])
 
   // Check screen size on mount and resize
   useEffect(() => {
@@ -61,13 +73,13 @@ const Navigation = () => {
       <Navbar expand="lg" className="main-navbar py-2">
         <Container className="custom-container">
           {/* Logo - always visible */}
-          <Navbar.Brand href="/" className="brand-logo">
-            <img src={logo || "/placeholder.svg"} alt="SmartView Tele Logo" className="logo-img" />
-            <span className="brand-text">
-              Smart<span className="view-text">View</span>
-              <span className="tele-text">Télé</span>
-            </span>
-          </Navbar.Brand>
+            <Navbar.Brand as={Link} to="/" className="brand-logo">
+              <img src={logo || "/placeholder.svg"} alt="SmartView Tele Logo" className="logo-img" />
+              <span className="brand-text">
+                Smart<span className="view-text">View</span>
+                <span className="tele-text">Télé</span>
+              </span>
+            </Navbar.Brand>
 
           {/* Tablet Search Bar - Only visible on tablet */}
           {isTablet && (
@@ -75,8 +87,8 @@ const Navigation = () => {
               <div className="search-wrapper">
                 <FormControl
                   type="search"
-                  placeholder="Search..."
-                  aria-label="Search"
+                  placeholder={t("navigation.search") + "..."}
+                  aria-label={t("navigation.search")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -109,19 +121,19 @@ const Navigation = () => {
           <Navbar.Collapse id="main-navbar-nav" className={isMobile ? "d-none" : ""}>
             <Nav className={`${isTablet ? "tablet-nav-links" : "mx-auto nav-links"}`}>
               <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>
-                Shop
+                {t("navigation.shop")}
               </NavLink>
               <NavLink to="/smart-tvs" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>
-                Smart TVs
+                {t("navigation.smartTVs")}
               </NavLink>
               <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>
-                About
+                {t("navigation.about")}
               </NavLink>
               <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>
-                Contact
+                {t("navigation.contact")}
               </NavLink>
               <NavLink to="/faqs" className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>
-                FAQs
+                {t("navigation.faqs")}
               </NavLink>
             </Nav>
 
@@ -130,9 +142,9 @@ const Navigation = () => {
               <Form className="d-flex search-form" onSubmit={handleSearch}>
                 <FormControl
                   type="search"
-                  placeholder="Search Smart TVs..."
+                  placeholder={`${t("navigation.search")} ${t("navigation.smartTVs")}...`}
                   className="me-5"
-                  aria-label="Search"
+                  aria-label={t("navigation.search")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -156,8 +168,8 @@ const Navigation = () => {
             <div className="search-wrapper">
               <FormControl
                 type="search"
-                placeholder="Search..."
-                aria-label="Search"
+                placeholder={t("navigation.search") + "..."}
+                aria-label={t("navigation.search")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -176,7 +188,10 @@ const Navigation = () => {
       {/* Mobile Menu - Only for mobile */}
       {isMobile && (
         <>
-          <div className={`mobile-menu-overlay ${mobileMenuOpen ? "active" : ""}`} onClick={closeMobileMenu}></div>
+          <div 
+            className={`mobile-menu-overlay ${mobileMenuOpen ? "active" : ""}`} 
+            onClick={closeMobileMenu}> 
+          </div>
           <div className={`mobile-menu ${mobileMenuOpen ? "active" : ""}`} id="mobile-menu">
             <div className="mobile-menu-header">
               <div className="mobile-brand">
@@ -203,8 +218,8 @@ const Navigation = () => {
                   <div className="search-wrapper">
                     <FormControl
                       type="search"
-                      placeholder="Search products..."
-                      aria-label="Search"
+                      placeholder={t("navigation.search") + "..."}
+                      aria-label={t("navigation.search")}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -218,23 +233,23 @@ const Navigation = () => {
               {/* Main Navigation Links with Arrows */}
               <div className="mobile-nav-section">
                 <NavLink to="/" className="mobile-nav-item" onClick={closeMobileMenu}>
-                  SHOP
+                  {t("navigation.shop").toUpperCase()}
                   <i className="fas fa-chevron-right"></i>
                 </NavLink>
                 <NavLink to="/smart-tvs" className="mobile-nav-item" onClick={closeMobileMenu}>
-                  SMART TVs
+                  {t("navigation.smartTVs").toUpperCase()}
                   <i className="fas fa-chevron-right"></i>
                 </NavLink>
                 <NavLink to="/about" className="mobile-nav-item" onClick={closeMobileMenu}>
-                  ABOUT US
+                  {t("navigation.about").toUpperCase()} 
                   <i className="fas fa-chevron-right"></i>
                 </NavLink>
                 <NavLink to="/contact" className="mobile-nav-item" onClick={closeMobileMenu}>
-                  CONTACT
+                  {t("navigation.contact").toUpperCase()}
                   <i className="fas fa-chevron-right"></i>
                 </NavLink>
                 <NavLink to="/faqs" className="mobile-nav-item" onClick={closeMobileMenu}>
-                  FAQs
+                  {t("navigation.faqs").toUpperCase()}
                   <i className="fas fa-chevron-right"></i>
                 </NavLink>
               </div>
@@ -244,16 +259,16 @@ const Navigation = () => {
                 <h3 className="mobile-section-title">Info</h3>
                 <div className="mobile-section-links">
                   <NavLink to="/search" className="mobile-section-link" onClick={closeMobileMenu}>
-                    Search
+                    {t("navigation.search")}
                   </NavLink>
                   <NavLink to="/about" className="mobile-section-link" onClick={closeMobileMenu}>
-                    About Us
+                    {t("navigation.about")} 
                   </NavLink>
                   <NavLink to="/contact" className="mobile-section-link" onClick={closeMobileMenu}>
-                    Contact Us
+                    {t("navigation.contact")} 
                   </NavLink>
                   <NavLink to="/faqs" className="mobile-section-link" onClick={closeMobileMenu}>
-                    FAQs
+                    {t("navigation.faqs")}
                   </NavLink>
                 </div>
               </div>
@@ -262,26 +277,31 @@ const Navigation = () => {
               <div className="mobile-section">
                 <h3 className="mobile-section-title">Get in touch</h3>
                 <div className="mobile-section-links">
-                  <a href="tel:+1234567890" className="mobile-section-link">
+                  <a href="tel:+2250575965968" className="mobile-section-link">
                     <i className="fas fa-phone-alt me-2"></i> +225 05 7596 5968
                   </a>
                   <div className="mobile-social-links">
-                    <a 
-                      href="https://www.facebook.com/share/18RmyzRPdq/?mibextid=wwXIfr" target="_blank" 
+                    <a
+                      href="https://www.facebook.com/share/18RmyzRPdq/?mibextid=wwXIfr"
+                      target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="Facebook"
                     >
                       <FaFacebookF />
                     </a>
-                    <a 
-                      href="https://www.instagram.com/tele_adjame_isreal?igsh=MWdobG9ydzF4eHZueQ%3D%3D&utm_source=qr" 
-                      target="_blank" 
+                    <a
+                      href="https://www.instagram.com/tele_adjame_isreal?igsh=MWdobG9ydzF4eHZueQ%3D%3D&utm_source=qr"
+                      target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="Instagram"
                     >
                       <FaInstagram />
                     </a>
-                    <a 
-                      href="https://www.tiktok.com/@isrealokey6?_t=ZM-8wESJbNhVLy&_r=1" target="_blank" 
+                    <a
+                      href="https://www.tiktok.com/@isrealokey6?_t=ZM-8wESJbNhVLy&_r=1"
+                      target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="TikTok"
                     >
                       <FaTiktok />
                     </a>

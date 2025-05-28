@@ -1,0 +1,414 @@
+{
+  "navigation": {
+    "shop": "Shop",
+    "smartTVs": "Smart TVs",
+    "about": "About",
+    "contact": "Contact",
+    "faqs": "FAQs",
+    "search": "Search"
+  },
+  "product": {
+    "viewTV": "View TV",
+    "price": "Price",
+    "discount": "Off",
+    "reviews": "Reviews",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "buyViaWhatsApp": "Buy via WhatsApp",
+    "quantity": "Quantity",
+    "description": "Description",
+    "specifications": "Specifications",
+    "features": "Key Features",
+    "freeDelivery": "Free Delivery",
+    "onOrdersOver": "On orders over"
+  },
+  "productDetails": {
+    "breadcrumbHome": "Home",
+    "breadcrumbSmartTVs": "Smart TVs",
+    "loadingProduct": "Loading product details...",
+    "productNotFound": "Product Not Found",
+    "productNotFoundMessage": "Sorry, the product you are looking for does not exist or has been removed.",
+    "backToCollection": "Back to Collection",
+    "sku": "SKU",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "keyFeatures": "Key Features:",
+    "noFeaturesListed": "No features listed",
+    "quantity": "Quantity",
+    "buyViaWhatsApp": "Buy via WhatsApp",
+    "freeDelivery": "Free Delivery",
+    "onOrdersOver": "On orders over",
+    "whatsappMessage": "I'm interested in {quantity} unit{plural} of {productName} for {totalPrice}. Could you provide more information?",
+    "unit": "",
+    "units": "s",
+    "tabDescription": "Description",
+    "tabSpecifications": "Specifications",
+    "tabReviews": "Reviews",
+    "productDescriptionTitle": "Product Description",
+    "productDescriptionText1": "The {productName} is a premium {size} {category} TV that combines cutting-edge technology with elegant design. With its {resolution} resolution, you'll enjoy crystal-clear images with vibrant colors and deep contrasts.",
+    "productDescriptionText2": "This smart TV comes with a user-friendly interface that gives you access to popular streaming services, allowing you to enjoy your favorite movies, shows, and content with ease. The built-in Wi-Fi ensures seamless connectivity, while multiple HDMI and USB ports provide versatile options for connecting external devices.",
+    "productDescriptionText3": "Experience immersive sound with the integrated speakers that deliver clear audio for an enhanced viewing experience. The sleek design with minimal bezels not only looks modern but also maximizes your viewing area.",
+    "technicalSpecifications": "Technical Specifications",
+    "customerReviews": "Customer Reviews",
+    "averageRating": "Based on {count} reviews",
+    "reviewsPlaceholder": "Customer reviews will appear here.",
+    "specifications": {
+      "screenSize": "Screen Size",
+      "resolution": "Resolution",
+      "displayType": "Display Type",
+      "smartFeatures": "Smart Features",
+      "hdr": "HDR",
+      "refreshRate": "Refresh Rate",
+      "connectivity": "Connectivity",
+      "audio": "Audio",
+      "dimensions": "Dimensions",
+      "smartFeaturesValue": "Streaming apps, Screen mirroring",
+      "hdrValue": "Yes",
+      "refreshRateValue": "60Hz",
+      "connectivityValue": "HDMI, USB, Wi-Fi, Bluetooth",
+      "audioValue": "20W Speakers"
+    }
+  },
+  "productCard": {
+    "viewTV": "View TV"
+  },
+  "collection": {
+    "title": "Smart TVs Collection",
+    "subtitle": "Smart TVs",
+    "showing": "Showing",
+    "of": "of",
+    "products": "products",
+    "perPage": "per page",
+    "noProducts": "No products match your selected filters. Try adjusting your filters or clearing them."
+  },
+  "common": {
+    "loading": "Loading products..."
+  },
+  "filterSidebar": {
+    "filters": "Filters",
+    "clearAll": "Clear All",
+    "brand": "Brand",
+    "category": "Category",
+    "screenSize": "Screen Size",
+    "priceRange": "Price Range",
+    "minPrice": "Min Price",
+    "maxPrice": "Max Price",
+    "apply": "Apply"
+  },
+  "sort": {
+    "title": "Sort by",
+    "featured": "Featured",
+    "priceLowToHigh": "Price: Low to High",
+    "priceHighToLow": "Price: High to Low",
+    "rating": "Highest Rated",
+    "newest": "Newest Arrivals"
+  },
+  "home": {
+    "featuredProducts": "Featured Products",
+    "featuredProductsSubtitle": "Discover our top-rated Smart TVs with cutting-edge technology",
+    "browseByCategory": "Browse by Category",
+    "browseSubtitle": "Find the perfect TV for your entertainment needs",
+    "explore": "Explore",
+    "specialOffer": "Limited Time Offer",
+    "specialOfferTitle": "Premium 4K Smart TV Experience",
+    "specialOfferDescription": "Upgrade your home entertainment with our premium selection of 4K Smart TVs at unbeatable prices.",
+    "upTo": "Up to",
+    "off": "OFF",
+    "offerEnds": "Offer ends in",
+    "days": "days",
+    "shopOffer": "Shop This Offer",
+    "trustedBrands": "Our Trusted Brands",
+    "trustedBrandsSubtitle": "We partner with the world's leading TV manufacturers",
+    "testimonials": "What Our Customers Say",
+    "testimonialsSubtitle": "Hear from our satisfied customers about their experience",
+    "ctaTitle": "Don't find what you're looking for?",
+    "ctaDescription": "We have more Smart TV models and accessories available! Contact our team directly for personalized assistance and special orders.",
+    "contactWhatsApp": "Contact us on WhatsApp"
+  },
+  "about": {
+    "title": "About SmartView Télé",
+    "subtitle": "Connecting the world through innovative technology",
+    "ourStory": "Our Story",
+    "storyText1": "Founded in 2022, SmartView Télé began with a simple mission: to provide cutting-edge telecommunications products that enhance people's lives. What started as a small operation has grown into a trusted name in the industry.",
+    "storyText2": "Our journey has been defined by innovation, quality, and customer satisfaction. We believe in creating products that not only meet but exceed expectations, setting new standards in the telecommunications market.",
+    "ourMission": "Our Mission",
+    "missionText": "At SmartView Télé, we're committed to delivering innovative telecommunications solutions that connect people and enhance their daily experiences. We strive to:",
+    "missionPoints": [
+      "Provide high-quality, reliable products",
+      "Offer exceptional customer service",
+      "Stay at the forefront of technological advancements",
+      "Create sustainable and eco-friendly solutions"
+    ],
+    "videoTitle": "Discover Our Story",
+    "videoText": "Watch this short video to learn more about SmartView Télé and our journey.",
+    "videoLabel": "Video: Our SmartView Télé Journey",
+    "ourValues": "Our Values",
+    "values": {
+      "innovation": {
+        "title": "Innovation",
+        "text": "We constantly push the boundaries of what's possible in telecommunications."
+      },
+      "quality": {
+        "title": "Quality",
+        "text": "We never compromise on the quality of our products and services."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "text": "We conduct business with honesty, transparency, and ethical standards."
+      },
+      "customerFocus": {
+        "title": "Customer Focus",
+        "text": "Our customers are at the heart of everything we do."
+      }
+    }
+  },
+  "contact": {
+    "heroTitle": "Contact Us",
+    "heroSubtitle": "Have questions about our Smart TVs or need assistance? We're here to help you find the perfect entertainment solution.",
+    "visitTitle": "Visit Our Store",
+    "visitAddress1": "Rue Nimlin Fax-Clark",
+    "visitAddress2": "Adjame, Abidjan, Côte d'Ivoire.",
+    "storeExtraTitle": "How to find us?",
+    "storeExtraDescription": "My store is the second shop behind ABASS TRANSPORT S.B.T.A in MIRADOR ADJAME ABIDJAN.",
+    "callTitle": "Call Us",
+    "callHours": "Mon-Sat: 7am - 7pm",
+    "emailTitle": "Email Us",
+    "emailNote": "We'll respond within 24 hours",
+    "formTitle": "Send Us a Message",
+    "formSubtitle": "Fill out the form below and we'll get back to you as soon as possible.",
+    "nameLabel": "Your Name*",
+    "namePlaceholder": "Enter your full name",
+    "emailLabel": "Email Address*",
+    "emailPlaceholder": "Enter your email",
+    "phoneLabel": "Phone Number*",
+    "phonePlaceholder": "01 23 45 67 89",
+    "subjectLabel": "Subject*",
+    "subjectPlaceholder": "What is this regarding?",
+    "messageLabel": "Message*",
+    "messagePlaceholder": "How can we help you?",
+    "contactMethodLabel": "Preferred Contact Method",
+    "emailOption": "Email",
+    "whatsappOption": "WhatsApp",
+    "submitEmail": "Send Message",
+    "submitWhatsApp": "Contact via WhatsApp",
+    "whatsappTitle": "Contact Us Directly on WhatsApp",
+    "whatsappText": "For immediate assistance, you can reach us directly on WhatsApp. Our customer service team is available to answer your questions about our Smart TVs.",
+    "whatsappBtn": "Chat with Us on WhatsApp",
+    "hoursTitle": "Business Hours",
+    "mondayToSaturday": "Monday - Saturday:",
+    "sunday": "Sunday:",
+    "closed": "Closed",
+    "connectWithUs": "Connect With Us",
+    "formSuccess": "Your message has been sent successfully! We will contact you soon.",
+    "formError": "There was an error sending your message. Please try again later.",
+    "formValidationError": "Please correct the errors in the form.",
+    "whatsappRedirect": "Redirecting you to WhatsApp to continue the conversation.",
+    "nameRequired": "Name is required",
+    "nameInvalid": "Please enter a valid name (letters only)",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email address",
+    "phoneRequired": "Phone number is required for WhatsApp contact",
+    "phoneInvalid": "Please enter a valid 10-digit Ivorian number (e.g., 0102030405), with or without +225",
+    "subjectRequired": "Subject is required",
+    "messageRequired": "Message is required",
+    "messageTooShort": "Message must be at least 10 characters",
+    "alerts": {
+      "success": "Your message has been sent successfully! We will contact you soon.",
+      "error": "There was an error sending your message. Please try again later.",
+      "validationError": "Please correct the errors in the form.",
+      "redirectingToWhatsApp": "Redirecting you to WhatsApp to continue the conversation."
+    }
+  },
+  "faqs": {
+    "title": "FAQs",
+    "subtitle": "Find answers to commonly asked questions about SmartView Télé",
+    "categories": "Categories",
+    "stillHaveQuestions": "Still have questions?",
+    "contactSupport": "Our customer support team is here to help you with any questions about our products and services.",
+    "chatWithUs": "Chat with Us",
+
+    "general": {
+      "title": "General",
+      "q1": {
+        "question": "What is SmartView Télé?",
+        "answer": "SmartView Télé is a provider of high-quality smart TVs and accessories based in Abidjan."
+      },
+      "q2": {
+        "question": "Where is your store located?",
+        "answer": "We are located in Adjame, Abidjan at Rue Nimlin Fax-Clark, behind ABASS TRANSPORT S.B.T.A."
+      }
+    },
+    "shipping": {
+      "title": "Shipping",
+      "q1": {
+        "question": "Do you offer nationwide shipping?",
+        "answer": "Yes, we ship to all regions of Côte d'Ivoire."
+      },
+      "q2": {
+        "question": "How long does delivery take?",
+        "answer": "Delivery usually takes 1-3 business days within Abidjan."
+      }
+    },
+    "installation": {
+      "title": "Installation",
+      "q1": {
+        "question": "Do you offer installation services?",
+        "answer": "Yes, we provide optional professional installation at your home."
+      }
+    },
+    "returns": {
+      "title": "Returns",
+      "q1": {
+        "question": "What is your return policy?",
+        "answer": "You can return products within 7 days of purchase with original packaging and receipt."
+      }
+    },
+    "payment": {
+      "title": "Payment",
+      "q1": {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept mobile money, cash on delivery, and bank transfers."
+      },
+      "q2": {
+        "question": "Can I pay in installments?",
+        "answer": "Currently, we do not offer installment payments."
+      }
+    }
+  },
+  "search": {
+    "pageTitle": "Search Smart TVs",
+    "inputPlaceholder": "Search for Smart TVs, brands, features...",
+    "searchBtn": "Search",
+    "filters": "Filters",
+    "clearAll": "Clear All",
+    "brand": "Brand",
+    "category": "Category",
+    "size": "Size",
+    "priceRange": "Price Range",
+    "min": "Min",
+    "max": "Max",
+    "activeFilters": "Active Filters",
+    "searching": "Searching...",
+    "foundProducts": "Found {count} {productLabel}",
+    "product": "product",
+    "products": "products",
+    "noResultsTitle": "No products found",
+    "noResultsMessage": "We couldn't find any products matching your search criteria. Please try different keywords or adjust your filters.",
+    "browseAll": "Browse All Products",
+    "searchResultsFor": "Search results for",
+    "popularSearches": "Popular Searches",
+    "oled": "OLED TVs",
+    "samsung": "Samsung",
+    "resolution4k": "4K Resolution",
+    "sixtyFiveInches": "65\" TVs"
+  },
+  "hero": {
+    "welcome": "Welcome to",
+    "subtitle": "Your go-to place for the best Smart TVs!",
+    "shopNow": "Shop Now",
+    "contactWhatsApp": "Contact via WhatsApp",
+    "whatsappMessage": "Hello! I'm interested in your Smart TVs. Can you assist me?",
+    "previous": "Previous image",
+    "next": "Next image",
+    "imageAlt": "Smart TV {{index}}"
+  },
+  "featured": {
+    "title": "Featured Products",
+    "subtitle": "Discover our top-rated Smart TVs with cutting-edge technology",
+    "view": "View TV",
+    "viewAll": "View All Products"
+  },
+  "categories": {
+    "title": "Browse by Category",
+    "subtitle": "Find the perfect TV for your entertainment needs",
+    "explore": "Explore",
+    "items": {
+      "oled": {
+        "name": "OLED TVs",
+        "desc": "Perfect black levels and infinite contrast"
+      },
+      "qled": {
+        "name": "QLED TVs",
+        "desc": "Vibrant colors with Quantum Dot technology"
+      },
+      "led": {
+        "name": "LED TVs",
+        "desc": "Affordable quality with great performance"
+      },
+      "smart": {
+        "name": "Smart TVs",
+        "desc": "Connect to your favorite streaming services"
+      }
+    }
+  },
+  "specialOffer": {
+    "badge": "Limited Time Offer",
+    "title": "Premium 4K Smart TV Experience",
+    "description": "Upgrade your home entertainment with our premium selection of 4K Smart TVs at unbeatable prices.",
+    "discount": "Up to 30% OFF",
+    "endsIn": "Offer ends in 5 days",
+    "features": [
+      "4K Ultra HD Resolution",
+      "Smart TV Functionality",
+      "Free Delivery & Installation"
+    ],
+    "button": "Shop This Offer"
+  },
+  "brands": {
+    "title": "Our Trusted Brands",
+    "description": "We partner with the world's leading TV manufacturers"
+  },
+  "testimonials": {
+    "title": "What Our Customers Say",
+    "description": "Hear from our satisfied customers about their experience",
+    "entries": [
+      {
+        "name": "Jean Kouassi",
+        "position": "Business Owner",
+        "text": "The quality of the Samsung QLED TV I purchased from SmartView Télé exceeded my expectations. The colors are vibrant and the customer service was exceptional. Highly recommended!"
+      },
+      {
+        "name": "Marie Diallo",
+        "position": "Interior Designer",
+        "text": "I bought an LG OLED TV for my new apartment and I am amazed by the picture quality. The team at SmartView Télé was very helpful in guiding me to choose the right model for my space."
+      },
+      {
+        "name": "Ahmed Touré",
+        "position": "Tech Enthusiast",
+        "text": "Great selection of smart TVs with competitive prices. The delivery was prompt and the installation service was professional. Will definitely shop here again for my tech needs."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Don't find what you're looking for?",
+    "description": "We have more Smart TV models and accessories available! Contact our team directly for personalized assistance and special orders.",
+    "button": "Contact via WhatsApp"
+  },
+  "newsletter": {
+    "title": "Subscribe to Our Newsletter",
+    "description": "Stay updated with our latest products, special offers, and TV technology news",
+    "emailPlaceholder": "Enter your email address",
+    "subscribeBtn": "Subscribe",
+    "subscribing": "Subscribing...",
+    "invalidEmail": "Please provide a valid email address.",
+    "privacyNote": "We respect your privacy. Unsubscribe at any time.",
+    "thankYouTitle": "Thank You!",
+    "thankYouMessage": "You have successfully subscribed to SmartView Télé's newsletter. Stay tuned for exciting updates!",
+    "closeBtn": "Close",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "errorNetwork": "An error occurred. Please try again later."
+  },
+  "recentlyViewed": {
+    "title": "Recently Viewed",
+    "subtitle": "Products you've viewed recently"
+  },
+  "footer": {
+    "about": "About Us",
+    "contact": "Contact Us",
+    "faqs": "FAQs",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "copyright": "© 2023 SmartView Télé. All rights reserved."
+  }
+}
+  

@@ -54,7 +54,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 12px !important;
     background-color: #25d366;
     color: white;
     padding: 18px 35px !important;
@@ -90,8 +90,9 @@
     }
     
     .whatsapp-contact-btn {
-      padding: 16px 30px !important;
+      padding: 16px 20px !important;
       font-size: 1.1rem;
+      gap: 7px !important;
     }
   }
   
@@ -123,7 +124,8 @@
       width: 100%;
       max-width: 300px;
       margin: 0 auto;
-      padding: 15px 25px !important;
+      padding: 15px 25px ;
+      gap: 10px !important;
     }
     
     .cta-container:before {
@@ -147,7 +149,7 @@
     }
     
     .whatsapp-contact-btn {
-      padding: 14px 20px;
+      padding: 14px 0px !important;
       font-size: 1rem;
     }
   }

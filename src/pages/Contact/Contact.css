@@ -68,7 +68,7 @@
     border-radius: 10px;
     transition: all 0.3s ease;
     height: 100%;
-    min-height: 380px; /* or whatever fits your design */
+    min-height: 380px; 
   }
   
   .contact-info-item:hover {
@@ -233,16 +233,17 @@
     margin-bottom: 25px;
   }
   
-  .whatsapp-btn {
-    background-color: #25D366;
-    border: none;
-    padding: 12px 25px;
+   .whatsapp-btn {
+    background-color: #25D366 !important;
+    border: none !important;
+    padding: 12px 30px !important;
     font-weight: 500;
     border-radius: 8px;
     transition: all 0.3s ease;
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 7px !important;
   }
   
   .whatsapp-btn:hover {

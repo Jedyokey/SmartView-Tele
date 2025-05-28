@@ -348,7 +348,7 @@
       padding-right: 2.5rem; /* Make space for the arrow */
     }
     
-    /* For dark background (if you're keeping the green) */
+    /* For dark background */
     .category-selector .form-select {
       color: white;
       background-color: #00796b;
@@ -362,6 +362,12 @@
     
     .category-title {
       font-size: 1.4rem;
+    }
+
+    .justify-content-center {
+      justify-content: center !important;
+      margin-right: 3px !important;
+      margin-left: 3px !important;
     }
     
     .contact-buttons .btn {

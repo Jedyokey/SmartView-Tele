@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Spinner, InputGroup } from 'react-bootstrap';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaWhatsapp, FaFacebookF, FaInstagram} from 'react-icons/fa';
 import { SiTiktok } from "react-icons/si";
+import { useTVContext } from '../../context/TVContext';
 import './Contact.css';
 
 const Contact = () => {
+  const { translations } = useTVContext();
+  const t = translations.contact;
+
   // Form state
   const [formData, setFormData] = useState({
     name: '',
@@ -48,17 +52,17 @@ const Contact = () => {
     
     // Name validation
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = t.validation.nameRequired;
     } else if (!/^[A-Za-z\s]{2,}$/.test(formData.name.trim())) {
-      newErrors.name = 'Please enter a valid name (letters only)';
+      newErrors.name = t.validation.nameInvalid;
     }
     
     // Email validation
     if (formData.contactMethod === 'email' || formData.email.trim()) {
       if (!formData.email.trim()) {
-        newErrors.email = 'Email is required';
+        newErrors.email = t.validation.emailRequired;
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-        newErrors.email = 'Please enter a valid email address';
+        newErrors.email = t.validation.emailInvalid;
       }
     }
     
@@ -67,22 +71,22 @@ const Contact = () => {
 
   if (formData.contactMethod === 'whatsapp' || cleanedPhone) {
     if (!cleanedPhone) {
-      newErrors.phone = 'Phone number is required for WhatsApp contact';
+      newErrors.phone = t.validation.phoneRequired;
     } else if (!/^(\+225|00225)?[0-9]{10}$/.test(cleanedPhone)) {
-      newErrors.phone = 'Please enter a valid 10-digit Ivorian number (e.g., 0102030405), with or without +225';
+      newErrors.phone = t.validation.phoneInvalid;
     }
   }
 
     // Subject validation
     if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
+      newErrors.subject = t.validation.subjectRequired;
     }
     
     // Message validation
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = t.validation.messageRequired;
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = t.validation.messageTooShort;
     }
     
     setErrors(newErrors);
@@ -123,7 +127,7 @@ const Contact = () => {
         if (data.success) {
           // Success
           setAlertVariant('success');
-          setAlertMessage('Your message has been sent successfully! We will contact you soon.');
+          setAlertMessage(t.alerts.success);
           
           // Reset form
           setFormData({
@@ -137,12 +141,12 @@ const Contact = () => {
         } else {
           // Error
           setAlertVariant('danger');
-          setAlertMessage('There was an error sending your message. Please try again later.');
+          setAlertMessage(t.alerts.error);
         }
       } catch (error) {
         console.error('Error submitting form:', error);
         setAlertVariant('danger');
-        setAlertMessage('There was an error sending your message. Please try again later.');
+        setAlertMessage(t.alerts.error);
       } finally {
         setIsSubmitting(false);
         setShowAlert(true);
@@ -154,14 +158,14 @@ const Contact = () => {
       }
     } else {
       setAlertVariant('danger');
-      setAlertMessage('Please correct the errors in the form.');
+      setAlertMessage(t.alerts.fixErrors);
       setShowAlert(true);
     }
   };
 
   // Redirect to WhatsApp
   const redirectToWhatsApp = () => {
-    const phoneNumber = '+2250575965968'; // Replace with actual seller's WhatsApp number
+    const phoneNumber = '+2250575965968'; 
     const message = `Hello, my name is ${formData.name}. ${formData.message}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${encodedMessage}`;
@@ -169,7 +173,7 @@ const Contact = () => {
     window.open(whatsappUrl, '_blank');
     
     setAlertVariant('success');
-    setAlertMessage('Redirecting you to WhatsApp to continue the conversation.');
+    setAlertMessage(t.alerts.redirectWhatsApp);
     setShowAlert(true);
   };
 
@@ -180,10 +184,9 @@ const Contact = () => {
         <Container>
           <Row className="justify-content-center">
             <Col md={10} lg={8} className="text-center">
-              <h1 className="contact-title">Contact Us</h1>
+              <h1 className="contact-title">{t.heroTitle}</h1>
               <p className="contact-subtitle">
-                Have questions about our Smart TVs or need assistance? 
-                We're here to help you find the perfect entertainment solution.
+                {t.heroSubtitle}
               </p>
             </Col>
           </Row>
@@ -198,14 +201,14 @@ const Contact = () => {
               <div className="contact-info-icon">
                 <FaMapMarkerAlt />
               </div>
-              <h3>Visit Our Store</h3>
-              <p>Rue Nimlin Fax-Clark</p>
-              <p>Adjame, Abidjan, Côte d'Ivoire.</p>
+              <h3>{t.visitTitle}</h3>
+              <p>{t.visitAddress1}</p>
+              <p>{t.visitAddress2}</p>
 
               {/* Extra Store Description */}
               <div className="store-extra-info">
-                <h5>Comment nous trouver ?</h5>
-                <p>Mon magasin est situé Le deuxième magasin Derriére ABASS TRANSPORT S.B.T.A dan MIRADOR ADJAME ABIDJAN.</p>
+                <h5>{t.storeExtraTitle}</h5>
+                <p>{t.storeExtraDescription}</p>
               </div>
             </Col>
             
@@ -213,18 +216,18 @@ const Contact = () => {
               <div className="contact-info-icon">
                 <FaPhone />
               </div>
-              <h3>Call Us</h3>
+              <h3>{t.callTitle}</h3>
               <p><a href="tel:+2250575965968">+225 05 7596 5968</a></p>
-              <p>Mon-Sat: 7am - 7pm</p>
+              <p>{t.callHours}</p>
             </Col>
             
             <Col lg={4} md={12} className="contact-info-item">
               <div className="contact-info-icon">
                 <FaEnvelope />
               </div>
-              <h3>Email Us</h3>
+              <h3>{t.emailTitle}</h3>
               <p><a href="mailto:isrealokeyonyeze@gmail.com">isrealokeyonyeze@gmail.com</a></p>
-              <p>We'll respond within 24 hours</p>
+              <p>{t.emailNote}</p>
             </Col>
           </Row>
         </Container>
@@ -236,8 +239,8 @@ const Contact = () => {
           <Row>
             <Col lg={6} className="mb-5 mb-lg-0">
               <div className="contact-form-wrapper">
-                <h2>Send Us a Message</h2>
-                <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                <h2>{t.formTitle}</h2>
+                <p>{t.formSubtitle}</p>
                 
                 {showAlert && (
                   <Alert 
@@ -258,14 +261,14 @@ const Contact = () => {
                   <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
                   
                   <Form.Group className="mb-3">
-                    <Form.Label>Your Name*</Form.Label>
+                    <Form.Label>{t.nameLabel}</Form.Label>
                     <Form.Control
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       isInvalid={!!errors.name}
-                      placeholder="Enter your full name"
+                      placeholder={t.namePlaceholder}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.name}
@@ -275,14 +278,14 @@ const Contact = () => {
                   <Row>
                     <Col md={6}>
                       <Form.Group className="mb-3">
-                        <Form.Label>Email Address*</Form.Label>
+                        <Form.Label>{t.emailLabel}</Form.Label>
                         <Form.Control
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
                           isInvalid={!!errors.email}
-                          placeholder="Enter your email"
+                          placeholder={t.emailPlaceholder}
                         />
                         <Form.Control.Feedback type="invalid">
                           {errors.email}
@@ -292,7 +295,7 @@ const Contact = () => {
                     
                     <Col md={6}>
                       <Form.Group className="mb-3">
-                        <Form.Label>Phone Number*</Form.Label>
+                        <Form.Label>{t.phoneLabel}</Form.Label>
                         <InputGroup>
                           <InputGroup.Text>+225</InputGroup.Text>
                           <Form.Control
@@ -312,14 +315,14 @@ const Contact = () => {
                   </Row>
                   
                   <Form.Group className="mb-3">
-                    <Form.Label>Subject*</Form.Label>
+                    <Form.Label>{t.subjectLabel}</Form.Label>
                     <Form.Control
                       type="text"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       isInvalid={!!errors.subject}
-                      placeholder="What is this regarding?"
+                      placeholder={t.subjectPlaceholder}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.subject}
@@ -327,7 +330,7 @@ const Contact = () => {
                   </Form.Group>
                   
                   <Form.Group className="mb-3">
-                    <Form.Label>Message*</Form.Label>
+                    <Form.Label>{t.messageLabel}</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={4}
@@ -335,7 +338,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       isInvalid={!!errors.message}
-                      placeholder="How can we help you?"
+                      placeholder={t.messagePlaceholder}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.message}
@@ -343,12 +346,12 @@ const Contact = () => {
                   </Form.Group>
                   
                   <Form.Group className="mb-4">
-                    <Form.Label>Preferred Contact Method</Form.Label>
+                    <Form.Label>{t.contactMethodLabel}</Form.Label>
                     <div>
                       <Form.Check
                         inline
                         type="radio"
-                        label="Email"
+                        label={t.emailOption}
                         name="contactMethod"
                         id="contactEmail"
                         value="email"
@@ -358,7 +361,7 @@ const Contact = () => {
                       <Form.Check
                         inline
                         type="radio"
-                        label="WhatsApp"
+                        label={t.whatsappOption}
                         name="contactMethod"
                         id="contactWhatsApp"
                         value="whatsapp"
@@ -386,23 +389,23 @@ const Contact = () => {
                         Sending...
                       </>
                     ) : (
-                      formData.contactMethod === 'whatsapp' ? 'Contact via WhatsApp' : 'Send Message'
+                      formData.contactMethod === 'whatsapp' ? t.submitWhatsApp : t.submitEmail
                     )}
                   </Button>
                 </Form>
               </div>
             </Col>
-            
+
+            {/* Whatsapp form section */}
             <Col lg={6}>
               <div className="contact-whatsapp-wrapper">
                 <div className="whatsapp-content">
                   <div className="whatsapp-icon">
                     <FaWhatsapp />
                   </div>
-                  <h2>Contact Us Directly on WhatsApp</h2>
+                  <h2>{t.whatsappTitle}</h2>
                   <p>
-                    For immediate assistance, you can reach us directly on WhatsApp. 
-                    Our customer service team is available to answer your questions about our Smart TVs.
+                    {t.whatsappText}
                   </p>
                   <Button 
                     variant="success" 
@@ -413,20 +416,20 @@ const Contact = () => {
                       window.open(`https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${message}`, '_blank');
                     }}
                   >
-                    <FaWhatsapp /> Chat with Us on WhatsApp
+                    <FaWhatsapp /> {t.whatsappBtn}
                   </Button>
                   
                   <div className="business-hours">
-                    <h3>Business Hours</h3>
+                    <h3>{t.hoursTitle}</h3>
                     <ul>
-                      <li><span>Monday - Saturday:</span> 7:00 AM - 7:00 PM</li>
-                      <li><span>Sunday:</span> Closed</li>
+                      <li><span>{t.mondayToSaturday}</span> 7:00 AM - 7:00 PM</li>
+                      <li><span>{t.sunday}</span> {t.closed}</li>
                     </ul>
                   </div>
                 </div>
                 
                 <div className="social-connect">
-                  <h3>Connect With Us</h3>
+                  <h3>{t.connectWithUs}</h3>
                   <div className="social-icons">
                     <a 
                       href="https://www.facebook.com/share/18RmyzRPdq/?mibextid=wwXIfr" className="social-icon"

@@ -21,6 +21,7 @@ const VideoPlayer = ({ video, playState, setPlayState }) => {
       document.body.style.overflow = ""
     }
   }, [playState])
+  
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -29,6 +30,14 @@ const VideoPlayer = ({ video, playState, setPlayState }) => {
     window.addEventListener("keydown", handleEsc)
     return () => window.removeEventListener("keydown", handleEsc)
   }, [setPlayState])
+
+  const closeButtonRef = useRef(null);
+
+  useEffect(() => {
+    if (playState) {
+      closeButtonRef.current?.focus();
+    }
+  }, [playState]);
 
   const handleOverlayClick = (e) => {
     // Close if clicked on the overlay (not video-wrapper)
@@ -44,15 +53,20 @@ const VideoPlayer = ({ video, playState, setPlayState }) => {
     <div
       className={`video-player ${playState ? "" : "hide"}`}
       onClick={handleOverlayClick}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Video player modal"
     >
       <button
         className="close-button"
         aria-label="Close video"
+        onClick={() => setPlayState(false)} 
+        ref={closeButtonRef}
       >
         <FaTimes />
       </button>
 
-      <div className="video-wrapper">
+      <div className="video-wrapper" onClick={(e) => e.stopPropagation()}>
         <video
           ref={videoRef}
           src={video}

@@ -1,57 +1,70 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FaWhatsapp, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useTVContext } from "../../context/TVContext";
 import "./Hero.css";
-import hero_image from "../../assets/hero-image.png";
-import hero_image2 from "../../assets/hero_image2.png";
+import hero_image_webp from "../../assets/hero-image.webp";
+import hero_image2_webp from "../../assets/hero_image2.webp";
+import hero_image_fallback from "../../assets/hero-image.png";
+import hero_image2_fallback from "../../assets/hero_image2.png";
 
-const images = [hero_image, hero_image2];
+const images = [
+  {
+    webp: hero_image_webp,
+    fallback: hero_image_fallback,
+    alt: "Smart TV Collection"
+  },
+  {
+    webp: hero_image2_webp,
+    fallback: hero_image2_fallback,
+    alt: "Premium Smart TV"
+  }
+];
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
-  const { language } = useTVContext(); // Sync language from global context
-  const { t, i18n } = useTranslation();
+  const { translations } = useTVContext();
+  const t = translations?.hero || {};
 
-  useEffect(() => {
-    i18n.changeLanguage(language);
-  }, [language, i18n]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(interval);
+  // Memoize navigation functions
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   }, []);
 
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const goToPrev = () => {
+  const goToPrev = useCallback(() => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  };
+  }, []);
 
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(goToNext, 4000);
+    return () => clearInterval(interval);
+  }, [goToNext]);
+
+  // WhatsApp setup
   const phoneNumber = "+2250575965968";
-  const whatsappMessage = t("hero.whatsappMessage");
+  const whatsappMessage = t.whatsappMessage || "Hello! I'm interested in your Smart TVs.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <div className="hero-container">
       <div className="hero-left">
         <h1>
-          {t("hero.welcome")}{" "}
+          {t.welcome || "Welcome to"}{" "}
           <span className="highlight-smart">SmartView</span>{" "}
           <span className="highlight-tele">Télé</span>
         </h1>
-        <p>{t("hero.subtitle")}</p>
+        <p>{t.subtitle || "Discover the future of entertainment"}</p>
 
-        <button className="shop-now-btn" onClick={() => navigate("/smart-tvs")}>
-          {t("hero.shopNow")}
+        <button 
+          className="shop-now-btn" 
+          onClick={() => navigate("/smart-tvs")}
+          aria-label={t.shopNow || "Shop Now"}
+        >
+          {t.shopNow || "Shop Now"}
         </button>
 
         <a
@@ -59,28 +72,39 @@ const Hero = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="whatsapp-btn"
+          aria-label={t.contactWhatsApp || "Contact on WhatsApp"}
         >
           <FaWhatsapp className="icon" />
-          {t("hero.contactWhatsApp")}
+          {t.contactWhatsApp || "Contact on WhatsApp"}
         </a>
       </div>
 
       <div className="hero-right">
         <div className="carousel-fade">
           {images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={t("hero.imageAlt", { index: index + 1 })}
-              className={`fade-image ${index === currentIndex ? "active" : ""}`}
-            />
+            <picture key={index} className={`fade-image ${index === currentIndex ? "active" : ""}`}>
+              <source srcSet={img.webp} type="image/webp" />
+              <img
+                src={img.fallback}
+                alt={t.imageAlt ? t.imageAlt.replace('{index}', index + 1) : img.alt}
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </picture>
           ))}
 
           <div className="nav-controls">
-            <button className="nav-btn prev" onClick={goToPrev} aria-label={t("hero.previous")}>
+            <button 
+              className="nav-btn prev" 
+              onClick={goToPrev} 
+              aria-label={t.previous || "Previous image"}
+            >
               <FaChevronLeft />
             </button>
-            <button className="nav-btn next" onClick={goToNext} aria-label={t("hero.next")}>
+            <button 
+              className="nav-btn next" 
+              onClick={goToNext} 
+              aria-label={t.next || "Next image"}
+            >
               <FaChevronRight />
             </button>
           </div>

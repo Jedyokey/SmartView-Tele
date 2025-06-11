@@ -153,6 +153,7 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .footer .newsletter-form .form-control {
@@ -161,7 +162,7 @@
   color: #fff;
   padding: 12px 15px;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 1px !important;
 }
 
 .footer .newsletter-form .form-control::placeholder {
@@ -173,6 +174,16 @@
   box-shadow: none;
 }
 
+.footer .newsletter-form .invalid-feedback {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 5px;
+  color: #ff6b6b;
+  font-size: 0.85rem;
+}
+
 .footer .subscribe-btn {
   background-color: #00796b;
   border: none;
@@ -180,6 +191,7 @@
   border-radius: 8px;
   transition: all 0.3s ease;
   font-weight: 500;
+  margin-top: 10px;
 }
 
 .footer .subscribe-btn:hover {
@@ -207,7 +219,7 @@
 .footer .social-icons .social-text {
   font-size: 1rem;
   color: #fff;
-  margin: 0; /* REMOVE margin-bottom that was pushing icons down */
+  margin: 0; 
 }
 
 .footer .social-links {
@@ -435,6 +447,28 @@
   .footer .language-toggle {
     justify-content: center;
   }
+
+  .footer .newsletter-form {
+    position: relative;
+  }
+
+  .footer .newsletter-form .form-control {
+    margin-bottom: 10px !important;
+  }
+
+  .footer .newsletter-form .invalid-feedback {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 5px;
+    color: #ff6b6b;
+    font-size: 0.85rem;
+  }
+
+  .footer .subscribe-btn {
+    margin-top: 35px;
+}
 }
 
 @media (max-width: 575px) {

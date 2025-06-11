@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap"
 import { useTVContext } from "../../context/TVContext"
+import { scrollToTop } from "../../utils/scrollToTop"
 import {
   FaFacebookF,
   FaInstagram,
@@ -9,11 +10,10 @@ import {
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
-  FaGlobe,
   FaCheckCircle,
 } from "react-icons/fa"
 import { SiTiktok } from "react-icons/si"
-import logo from "../../assets/smartview-pro-logo-2.png" // Replace with your logo path
+import logo from "../../assets/smartview-pro-logo-2.png" 
 import "./Footer.css"
 
 const Footer = () => {
@@ -22,7 +22,7 @@ const Footer = () => {
   const [loading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
-  // Get language functions from context - including the new loading function
+  // Get language functions from context
   const { language, switchLanguageWithLoading, languageLoading } = useTVContext()
 
   // Content in both languages
@@ -86,13 +86,12 @@ const Footer = () => {
   // Current language content
   const t = content[language]
 
-  // Updated language change function to use the loading animation
+  // Handle language change
   const handleLanguageChange = (lang) => {
     if (lang !== language && !languageLoading) {
-      // Store in localStorage with your preferred key
       localStorage.setItem("preferredLanguage", lang)
-      // Trigger the loading animation
       switchLanguageWithLoading(lang)
+      scrollToTop()
     }
   }
 
@@ -116,7 +115,7 @@ const Footer = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          access_key: "c24dc6ef-8062-4b51-9a87-a59e90a306e3", // Replace with your actual key
+          access_key: "c24dc6ef-8062-4b51-9a87-a59e90a306e3", 
           email: email,
           subject: "New Newsletter Subscription",
           from_name: "SmartView Télé Newsletter",
@@ -142,14 +141,14 @@ const Footer = () => {
       <div className="footer-main">
         <Container>
           <Row>
-            {/* Company Info */}
+            {/* Business Info */}
             <Col lg={3} md={6} sm={12} className="footer-column">
-              <div className="footer-logo d-flex align-items-center">
+              <Link to="/" className="footer-logo d-flex align-items-center text-decoration-none">
                 <img src={logo || "/placeholder.svg"} alt="SmartView Tele Logo" className="logo-img" />
                 <h2 className="mb-0">
                   SmartView <span>Télé</span>
                 </h2>
-              </div>
+              </Link>
               <p className="footer-about">
                 {language === "en"
                   ? "Your premier destination for high-quality Smart TVs and home entertainment systems in Ivory Coast."
@@ -163,14 +162,15 @@ const Footer = () => {
                     onClick={() => handleLanguageChange("en")}
                     disabled={languageLoading}
                   >
-                    <FaGlobe /> {t.english}
+                    EN
                   </button>
+                  <span className="separator">|</span>
                   <button
                     className={`language-btn ${language === "fr" ? "active" : ""} ${languageLoading ? "loading" : ""}`}
                     onClick={() => handleLanguageChange("fr")}
                     disabled={languageLoading}
                   >
-                    <FaGlobe /> {t.french}
+                    FR
                   </button>
                 </div>
               </div>

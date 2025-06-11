@@ -71,14 +71,9 @@
 /* Products grid with fixed columns */
 .products-grid {
   margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -10px;
-  margin-right: -10px;
 }
 
 .product-col {
-  width: 33.333%;
   padding: 0 10px;
   margin-bottom: 30px;
 }
@@ -131,6 +126,7 @@
 .page-item.active .page-link {
   background-color: #00796b;
   border-color: #00796b;
+  color: white;
 }
 
 .page-item.disabled .page-link {

@@ -1,23 +1,58 @@
 import { useState, useEffect } from "react"
 import { Container, Row, Col, Breadcrumb, Alert, Spinner, Pagination, Form } from "react-bootstrap"
+import { useLocation, useNavigate, Link } from "react-router-dom"
 import ProductCard from "../../components/ProductCard/ProductCard"
 import FilterSidebar from "../../components/FilterSidebar/FilterSidebar"
 import SortDropdown from "../../components/SortDropdown/SortDropdown"
 import { useTVContext } from "../../context/TVContext"
-import "./CollectionPage.css"
+import "./CollectionPage.css"  
 
 const CollectionPage = () => {
-  const { filteredProducts, loading } = useTVContext()
+  const { filteredProducts, loading, reloadProducts, translations } = useTVContext();
+  const t = translations.collection;
+  
   const [showFilters, setShowFilters] = useState(false)
   const [itemsPerPage, setItemsPerPage] = useState(9)
+
+  // Get location and navigate for URL handling
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  // Get page from URL query params or default to 1
+  const queryParams = new URLSearchParams(location.search)
+  const pageFromUrl = Number.parseInt(queryParams.get("page") || "1", 10)
+
   // Pagination state
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(pageFromUrl)
   const [paginatedProducts, setPaginatedProducts] = useState([])
   const [totalPages, setTotalPages] = useState(1)
 
   const toggleFilters = () => {
     setShowFilters(!showFilters)
   }
+
+  // Update URL when page changes
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    if (currentPage > 1) {
+      params.set("page", currentPage.toString())
+    } else {
+      params.delete("page")
+    }
+
+    const newSearch = params.toString()
+    const newPath = `${location.pathname}${newSearch ? `?${newSearch}` : ""}`
+
+    // Only update if the URL would actually change
+    if (location.search !== (newSearch ? `?${newSearch}` : "")) {
+      navigate(newPath, { replace: true })
+    }
+  }, [currentPage, location.pathname, location.search, navigate])
+ 
+  // Reset loading state and reload products when the component mounts
+  useEffect(() => {
+    reloadProducts(); // Reset loading state and reload products
+  }, [location.pathname]); // Trigger on route change
 
   // Update pagination when filtered products change
   useEffect(() => {
@@ -42,10 +77,15 @@ const CollectionPage = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber)
     // Scroll to top of products
-    window.scrollTo({
-      top: document.querySelector(".collection-toolbar").offsetTop - 100,
-      behavior: "smooth",
-    })
+    setTimeout(() => {
+      const toolbar = document.querySelector(".collection-toolbar")
+      if (toolbar) {
+        window.scrollTo({
+          top: toolbar.offsetTop - 100,
+          behavior: "smooth",
+        })
+      }
+    }, 100)
   }
 
   // Handle items per page change
@@ -102,14 +142,19 @@ const CollectionPage = () => {
     return items
   }
 
+  // Check if there's only one product in the collection
+  const isSingleProduct = paginatedProducts.length === 1 && filteredProducts.length === 1
+
   return (
     <div className="collection-page">
       <div className="collection-header">
         <Container>
-          <h1>Smart TVs Collection</h1>
+          <h1>{t.title}</h1>
           <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item active>Smart TVs</Breadcrumb.Item>
+            <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/" }}>
+              {translations?.productDetails?.breadcrumbHome || "Home"}
+            </Breadcrumb.Item> 
+            <Breadcrumb.Item active>{t.subtitle}</Breadcrumb.Item>
           </Breadcrumb>
         </Container>
       </div>
@@ -125,10 +170,10 @@ const CollectionPage = () => {
             <div className="collection-toolbar">
               <div className="results-count">
                 {loading ? (
-                  <span>Loading products...</span>
+                  <span>{translations.common.loading}</span>
                 ) : (
                   <span>
-                    Showing {paginatedProducts.length} of {filteredProducts.length} products
+                    {t.showing} {paginatedProducts.length} {t.of} {filteredProducts.length} {t.products}
                   </span>
                 )}
               </div>
@@ -143,18 +188,18 @@ const CollectionPage = () => {
                 <Spinner animation="border" role="status" variant="primary">
                   <span className="visually-hidden">Loading...</span>
                 </Spinner>
-                <p>Loading products...</p>
+                <p>{translations.common.loading}</p>
               </div>
             ) : filteredProducts.length === 0 ? (
               <Alert variant="info">
-                No products match your selected filters. Try adjusting your filters or clearing them.
+                {t.noProducts}
               </Alert>
             ) : (
               <>
                 <Row className="products-grid">
                   {paginatedProducts.map((product) => (
-                    <Col key={product.id} className="product-col">
-                      <ProductCard product={product} />
+                    <Col lg={4} md={6} sm={6} xs={12} key={product.id} className="product-col">
+                      <ProductCard product={product} currentPage={currentPage} isAlone={isSingleProduct} />
                     </Col>
                   ))}
                 </Row>
@@ -183,10 +228,10 @@ const CollectionPage = () => {
                         onChange={handleItemsPerPageChange}
                         aria-label="Items per page"
                       >
-                        <option value={9}>9 per page</option>
-                        <option value={18}>18 per page</option>
-                        <option value={27}>27 per page</option>
-                        <option value={36}>36 per page</option>
+                        <option value={9}>9 {t.perPage}</option>
+                        <option value={18}>18 {t.perPage}</option>
+                        <option value={27}>27 {t.perPage}</option>
+                        <option value={36}>36 {t.perPage}</option>
                       </Form.Select>
                     </div>
                   </div>

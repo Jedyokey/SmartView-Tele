@@ -1,97 +1,112 @@
-import React from 'react';
-import "./About.css"
+import React, { lazy, Suspense } from 'react';
+import smartview_video from "../../assets/smartview_video.mov";
+import { FaPlay } from 'react-icons/fa';
+import { useTVContext } from '../../context/TVContext';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import "./About.css";
 
-const About = () => {
+// Lazy load heavy components
+const VideoPlayer = lazy(() => import('../../components/VideoPlayer/VideoPlayer'));
+
+const About = ({ playState, setPlayState }) => {
+  const { translations } = useTVContext();
+  const t = translations.about;
+
   return (
     <div className="about-container">
-      {/* Hero Section */}
       <div className="about-hero">
         <div className="hero-content">
-          <h1>About SmartView Télé</h1>
-          <p>Connecting the world through innovative technology</p>
+          <h1>{t.title}</h1>
+          <p>{t.subtitle}</p>
         </div>
       </div>
 
-      {/* Our Story Section */}
       <section className="about-section story-section">
         <div className="section-content">
-          <h2>Our Story</h2>
-          <p>
-            Founded in 2015, SmartView Télé began with a simple mission: to provide cutting-edge telecommunications
-            products that enhance people's lives. What started as a small operation has grown into a trusted name in the
-            industry.
-          </p>
-          <p>
-            Our journey has been defined by innovation, quality, and customer satisfaction. We believe in creating
-            products that not only meet but exceed expectations, setting new standards in the telecommunications market.
-          </p>
+          <h2>{t.ourStory}</h2>
+          <p>{t.storyText1}</p>
+          <p>{t.storyText2}</p>
         </div>
         <div className="image-container">
-          {/* Placeholder for company history image */}
-          <img src="/placeholder.svg?height=400&width=600" alt="Our company history" className="about-image" />
+          <img 
+            src="https://i.pinimg.com/736x/d8/17/29/d8172984bb54dc8af11165c7e7bae97e.jpg" alt="Our company history" 
+            className="about-image" 
+            loading="lazy"  // Native lazy loading
+            decoding="async" // Better performance
+          />
         </div>
       </section>
 
-      {/* Our Mission Section */}
       <section className="about-section mission-section">
         <div className="image-container">
-          {/* Placeholder for mission image */}
-          <img src="/placeholder.svg?height=400&width=600" alt="Our mission" className="about-image" />
+          <img 
+            src="https://i.pinimg.com/736x/91/bb/91/91bb917f284d871088a8467df0949046.jpg" alt="Our mission" 
+            className="about-image" 
+            loading="lazy"  // Native lazy loading
+            decoding="async" // Better performance
+          />
         </div>
         <div className="section-content">
-          <h2>Our Mission</h2>
-          <p>
-            At SmartView Télé, we're committed to delivering innovative telecommunications solutions that connect people
-            and enhance their daily experiences. We strive to:
-          </p>
+          <h2>{t.ourMission}</h2>
+          <p>{t.missionText}</p>
           <ul>
-            <li>Provide high-quality, reliable products</li>
-            <li>Offer exceptional customer service</li>
-            <li>Stay at the forefront of technological advancements</li>
-            <li>Create sustainable and eco-friendly solutions</li>
+            {t.missionPoints.map((point, idx) => (
+              <li key={idx}>{point}</li>
+            ))}
           </ul>
         </div>
       </section>
 
-      {/* Video Section */}
       <section className="about-section video-section">
-        <h2>Discover Our Story</h2>
-        <p>Watch this short video to learn more about SmartView Télé and our journey.</p>
+        <h2>{t.videoTitle}</h2>
+        <p>{t.videoText}</p>
+        
         <div className="video-container">
-          {/* Placeholder for video - will be replaced with actual video */}
-          <div className="video-placeholder">
-            <div className="play-button">
-              <span>▶</span>
+          <div className="video-placeholder" onClick={() => setPlayState(true)}>
+            <img 
+              src="https://i.pinimg.com/736x/91/bb/91/91bb917f284d871088a8467df0949046.jpg" alt="SmartView Télé video preview" 
+              className="video-thumbnail" 
+              loading="lazy"  // Native lazy loading
+              decoding="async" // Better performance
+            />
+            <div 
+              className="play-button" 
+              aria-label="Play Video"
+              role="button"
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                setPlayState(true); 
+              }}
+            >
+              <FaPlay />
             </div>
-            <p>Video: Our SmartView Télé Journey</p>
+            <p>{t.videoLabel}</p>
           </div>
         </div>
+        <Suspense fallback={<LoadingSpinner />}>
+          {playState && (
+            <VideoPlayer 
+              video={smartview_video} 
+              playState={playState} 
+              setPlayState={setPlayState} 
+            />
+          )}
+        </Suspense>
       </section>
 
-      {/* Values Section */}
       <section className="about-section values-section">
-        <h2>Our Values</h2>
+        <h2>{t.ourValues}</h2>
         <div className="values-grid">
-          <div className="value-card">
-            <h3>Innovation</h3>
-            <p>We constantly push the boundaries of what's possible in telecommunications.</p>
-          </div>
-          <div className="value-card">
-            <h3>Quality</h3>
-            <p>We never compromise on the quality of our products and services.</p>
-          </div>
-          <div className="value-card">
-            <h3>Integrity</h3>
-            <p>We conduct business with honesty, transparency, and ethical standards.</p>
-          </div>
-          <div className="value-card">
-            <h3>Customer Focus</h3>
-            <p>Our customers are at the heart of everything we do.</p>
-          </div>
+          {Object.entries(t.values).map(([key, value]) => (
+            <div key={key} className="value-card">
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;

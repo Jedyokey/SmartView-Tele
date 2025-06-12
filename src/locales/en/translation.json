@@ -82,7 +82,8 @@
     "noProducts": "No products match your selected filters. Try adjusting your filters or clearing them."
   },
   "common": {
-    "loading": "Loading products..."
+    "loading": "Loading products...",
+    "loadingApp": "Loading SmartView Télé..."
   },
   "filterSidebar": {
     "filters": "Filters",

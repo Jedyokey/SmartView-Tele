@@ -82,7 +82,8 @@
       "noProducts": "Aucun produit ne correspond à vos filtres sélectionnés. Essayez d'ajuster ou de réinitialiser vos filtres."
     },
     "common": {
-      "loading": "Chargement des produits..."
+      "loading": "Chargement des produits...",
+      "loadingApp": "Chargement SmartView Télé..."
     },
     "filterSidebar": {
       "filters": "Filtres",

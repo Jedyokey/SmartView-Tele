@@ -2,6 +2,7 @@ import { createContext, useState, useContext, useEffect } from "react"
 import smartTVs from "../TV_Data/data"
 import en from "../locales/en/translation.json"
 import fr from "../locales/fr/translation.json"
+import i18n from "i18next"
 
 // Create context
 const TVContext = createContext()
@@ -29,20 +30,23 @@ export const TVProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   // Language states
-  const [language, setLanguage] = useState("en")
+  const [language, setLanguage] = useState(() => {
+    const storedLang = localStorage.getItem("appLanguage") || "en"
+    // Initialize i18n with stored language
+    i18n.changeLanguage(storedLang)
+    return storedLang
+  })
   const [languageLoading, setLanguageLoading] = useState(false)
   const [targetLanguage, setTargetLanguage] = useState(null)
 
   // Size mapping for language-neutral storage
   const [sizeMapping, setSizeMapping] = useState(new Map())
 
+  // Sync language with i18n
   useEffect(() => {
-    const storedLang = localStorage.getItem("appLanguage")
-    if (storedLang) setLanguage(storedLang)
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem("appLanguage", language)
+    if (language !== i18n.language) {
+      i18n.changeLanguage(language)
+    }
   }, [language])
 
   const translations = {
@@ -112,8 +116,9 @@ export const TVProvider = ({ children }) => {
     // Simulate content fetching delay
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
-    // Update language
+    // Update language in both context and i18n
     setLanguage(newLanguage)
+    await i18n.changeLanguage(newLanguage)
     localStorage.setItem("appLanguage", newLanguage)
 
     // Filters are already stored as neutral keys, so they'll work automatically

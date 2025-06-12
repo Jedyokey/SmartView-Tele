@@ -2,7 +2,7 @@ import React from "react"
 import { useTVContext } from "../../context/TVContext"
 import "./LanguageToggle.css"
 
-const LanguageToggle = () => {
+const LanguageToggle = ({ onLanguageChange }) => {
   const { language, switchLanguageWithLoading, languageLoading } = useTVContext()
 
   const changeLanguage = (lang) => {
@@ -10,6 +10,10 @@ const LanguageToggle = () => {
       // Keep your original localStorage key
       localStorage.setItem("preferredLanguage", lang)
       switchLanguageWithLoading(lang)
+      // Only call onLanguageChange if it's provided
+      if (typeof onLanguageChange === 'function') {
+        onLanguageChange(lang)
+      }
     }
   }
 

@@ -100,6 +100,17 @@
     color: #001c29;
     font-size: 1.1rem;
   }
+
+  .recently-viewed-section .row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+    justify-content: center;
+}
   
   @media (max-width: 767px) {
     .recently-viewed-section {
@@ -115,7 +126,8 @@
   @media (max-width: 575px) {
     .recently-viewed-section {
       padding: 30px 0;
-      margin-bottom: 30px;
+      margin-bottom: -10px;
+      padding-bottom: 60px;
     }
   
     .section-header h2 {

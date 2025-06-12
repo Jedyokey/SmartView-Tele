@@ -176,7 +176,7 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 121, 107, 0.25);
   }
   
-  .submit-btn {
+  .contact-page .submit-btn {
     background-color: #00796b;
     border: none;
     padding: 12px 25px;
@@ -186,7 +186,7 @@
     width: 100%;
   }
   
-  .submit-btn:hover {
+  .contact-page .submit-btn:hover {
     background-color: #005a4f;
     transform: translateY(-2px);
   }
@@ -457,8 +457,8 @@
       font-size: 1.5rem;
     }
     
-    .submit-btn,
-    .whatsapp-btn {
+    .contact-page .submit-btn,
+    .contact-page .whatsapp-btn {
       padding: 10px 20px;
       font-size: 0.95rem;
     }

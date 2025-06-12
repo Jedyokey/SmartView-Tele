@@ -189,8 +189,6 @@
     "contactMethodLabel": "Preferred Contact Method",
     "emailOption": "Email",
     "whatsappOption": "WhatsApp",
-    "submitEmail": "Send Message",
-    "submitWhatsApp": "Contact via WhatsApp",
     "whatsappTitle": "Contact Us Directly on WhatsApp",
     "whatsappText": "For immediate assistance, you can reach us directly on WhatsApp. Our customer service team is available to answer your questions about our Smart TVs.",
     "whatsappBtn": "Chat with Us on WhatsApp",
@@ -212,11 +210,20 @@
     "subjectRequired": "Subject is required",
     "messageRequired": "Message is required",
     "messageTooShort": "Message must be at least 10 characters",
+    "whatsappMessage": {
+    "greeting": "Hello, my name is",
+    "whatsappTextMessage": "Hello, I am interested in your Smart TVs."
+    },
     "alerts": {
       "success": "Your message has been sent successfully! We will contact you soon.",
       "error": "There was an error sending your message. Please try again later.",
       "validationError": "Please correct the errors in the form.",
       "redirectingToWhatsApp": "Redirecting you to WhatsApp to continue the conversation."
+    },
+    "contactButton": {
+      "sending": "Sending...",
+      "sendMessage": "Send Message",
+      "contactViaWhatsapp": "Contact via WhatsApp"
     }
   },
   "faqs": {
@@ -402,6 +409,11 @@
     "title": "Recently Viewed",
     "subtitle": "Products you've viewed recently"
   },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "Sorry, the page you are looking for doesn't exist or has been moved.",
+    "backToHome": "Back to Home"
+  },
   "footer": {
     "about": "About Us",
     "contact": "Contact Us",
@@ -409,6 +421,10 @@
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy",
     "copyright": "© 2023 SmartView Télé. All rights reserved."
+  },
+  "whatsapp": {
+    "message": "Hello! I'm interested in your Smart TVs. Can you help me find what I'm looking for?",
+    "ariaLabel": "Chat on WhatsApp"
   }
 }
   

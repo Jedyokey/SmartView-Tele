@@ -79,7 +79,7 @@
       "of": "sur",
       "products": "produits",
       "perPage": "par page",
-      "noProducts": "Aucun produit ne correspond à vos filtres sélectionnés. Essayez d’ajuster ou de réinitialiser vos filtres."
+      "noProducts": "Aucun produit ne correspond à vos filtres sélectionnés. Essayez d'ajuster ou de réinitialiser vos filtres."
     },
     "common": {
       "loading": "Chargement des produits..."
@@ -164,7 +164,7 @@
     },
     "contact": {
       "heroTitle": "Contactez-nous",
-      "heroSubtitle": "Des questions sur nos Smart TVs ou besoin d’assistance ? Nous sommes là pour vous aider à trouver la solution de divertissement idéale.",
+      "heroSubtitle": "Des questions sur nos Smart TVs ou besoin d'assistance ? Nous sommes là pour vous aider à trouver la solution de divertissement idéale.",
       "visitTitle": "Visitez notre magasin",
       "visitAddress1": "Rue Nimlin Fax-Clark",
       "visitAddress2": "Adjamé, Abidjan, Côte d'Ivoire.",
@@ -189,8 +189,6 @@
       "contactMethodLabel": "Méthode de contact préférée",
       "emailOption": "E-mail",
       "whatsappOption": "WhatsApp",
-      "submitEmail": "Envoyer le message",
-      "submitWhatsApp": "Contacter via WhatsApp",
       "whatsappTitle": "Contactez-nous directement sur WhatsApp",
       "whatsappText": "Pour une assistance immédiate, contactez-nous directement sur WhatsApp. Notre service client est disponible pour répondre à vos questions sur nos Smart TVs.",
       "whatsappBtn": "Discuter avec nous sur WhatsApp",
@@ -212,11 +210,20 @@
       "subjectRequired": "L'objet est requis",
       "messageRequired": "Le message est requis",
       "messageTooShort": "Le message doit contenir au moins 10 caractères",
+      "whatsappMessage": {
+        "greeting": "Bonjour, je m'appelle",
+        "whatsappTextMessage": "Bonjour, je suis intéressé par vos Smart TVs."
+        },
       "alerts": {
         "success": "Votre message a été envoyé avec succès ! Nous vous contacterons bientôt.",
         "error": "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer plus tard.",
         "validationError": "Veuillez corriger les erreurs dans le formulaire.",
         "redirectingToWhatsApp": "Redirection vers WhatsApp pour poursuivre la conversation."
+      },
+      "contactButton": {
+        "sending": "Envoi...",
+        "sendMessage": "Envoyer le message",
+        "contactViaWhatsapp": "Contacter via WhatsApp"
       }
     },
     "faqs": {
@@ -402,6 +409,11 @@
       "title": "Récemment Consultés",
       "subtitle": "Produits que vous avez consultés récemment"
     },
+    "notFound": {
+      "title": "Page non trouvée",
+      "message": "Désolé, la page que vous recherchez n'existe pas ou a été déplacée.",
+      "backToHome": "Retour à l'accueil"
+    },
     "footer": {
       "about": "À Propos",
       "contact": "Contact",
@@ -409,6 +421,10 @@
       "terms": "Conditions Générales",
       "privacy": "Politique de Confidentialité",
       "copyright": "© 2023 SmartView Télé. Tous droits réservés."
+    },
+    "whatsapp": {
+      "message": "Bonjour ! Je suis intéressé par vos Smart TVs. Pouvez-vous m'aider à trouver ce que je cherche ?",
+      "ariaLabel": "Discuter sur WhatsApp"
     }
   }
   

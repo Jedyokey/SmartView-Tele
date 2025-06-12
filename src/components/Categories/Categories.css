@@ -1,5 +1,5 @@
 .categories-section {
-    padding: 80px 0;
+    padding: 30px 0;
     background-color: white;
   }
   
@@ -158,5 +158,11 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    .col-12 {
+      flex: 0 0 auto;
+      width: 100%;
+      margin-bottom: 40px;
+   }
   }
   

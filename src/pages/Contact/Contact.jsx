@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, lazy, Suspense } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Spinner, InputGroup } from 'react-bootstrap';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaWhatsapp, FaFacebookF, FaInstagram} from 'react-icons/fa';
 import { SiTiktok } from "react-icons/si";
-import { useTVContext } from '../../context/TVContext';
+import { useTVContext } from "../../context/TVContext"
 import './Contact.css';
 
+// lazy component
+const MapSection = lazy(() => import('../../components/MapSection/MapSection'));
+
 const Contact = () => {
-  const { translations } = useTVContext();
-  const t = translations.contact;
+  const { translations } = useTVContext()
+  const t = translations.contact
+  const alertRef = useRef(null);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -26,7 +30,7 @@ const Contact = () => {
   const [alertVariant, setAlertVariant] = useState('success');
   const [alertMessage, setAlertMessage] = useState('');
 
-  // Web3Forms access key - you'll need to replace this with your actual key
+  // Web3Forms access key 
   const WEB3FORMS_ACCESS_KEY = 'c24dc6ef-8062-4b51-9a87-a59e90a306e3';
 
   // Handle input changes
@@ -52,41 +56,41 @@ const Contact = () => {
     
     // Name validation
     if (!formData.name.trim()) {
-      newErrors.name = t.validation.nameRequired;
+      newErrors.name = t.nameRequired;
     } else if (!/^[A-Za-z\s]{2,}$/.test(formData.name.trim())) {
-      newErrors.name = t.validation.nameInvalid;
+      newErrors.name = t.nameInvalid;
     }
     
     // Email validation
     if (formData.contactMethod === 'email' || formData.email.trim()) {
       if (!formData.email.trim()) {
-        newErrors.email = t.validation.emailRequired;
+        newErrors.email = t.emailRequired;
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-        newErrors.email = t.validation.emailInvalid;
+        newErrors.email = t.emailInvalid;
       }
     }
     
-  // Phone validation
-  const cleanedPhone = formData.phone.replace(/\s/g, '');
+    // Phone validation
+    const cleanedPhone = formData.phone.replace(/\s/g, '');
 
-  if (formData.contactMethod === 'whatsapp' || cleanedPhone) {
-    if (!cleanedPhone) {
-      newErrors.phone = t.validation.phoneRequired;
-    } else if (!/^(\+225|00225)?[0-9]{10}$/.test(cleanedPhone)) {
-      newErrors.phone = t.validation.phoneInvalid;
+    if (formData.contactMethod === 'whatsapp' || cleanedPhone) {
+      if (!cleanedPhone) {
+        newErrors.phone = t.phoneRequired;
+      } else if (!/^(\+225|00225)?[0-9]{10}$/.test(cleanedPhone)) {
+        newErrors.phone = t.phoneInvalid;
+      }
     }
-  }
 
     // Subject validation
     if (!formData.subject.trim()) {
-      newErrors.subject = t.validation.subjectRequired;
+      newErrors.subject = t.subjectRequired;
     }
     
     // Message validation
     if (!formData.message.trim()) {
-      newErrors.message = t.validation.messageRequired;
+      newErrors.message = t.messageRequired;
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = t.validation.messageTooShort;
+      newErrors.message = t.messageTooShort;
     }
     
     setErrors(newErrors);
@@ -96,11 +100,23 @@ const Contact = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    // Always scroll to top of the form section when submitting
+    alertRef.current?.scrollIntoView({ behavior: 'smooth' });
+
+    // Validate form
     if (validateForm()) {
       // If WhatsApp is selected as contact method
       if (formData.contactMethod === 'whatsapp') {
         redirectToWhatsApp();
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+          contactMethod: 'email'
+        });
         return;
       }
       
@@ -110,12 +126,17 @@ const Contact = () => {
         
         const formDataToSend = new FormData();
         formDataToSend.append('access_key', WEB3FORMS_ACCESS_KEY);
+        formDataToSend.append('botcheck', ''); // Honeypot must be empty
         formDataToSend.append('name', formData.name);
         formDataToSend.append('email', formData.email);
-        formDataToSend.append('phone', formData.phone);
-        formDataToSend.append('subject', formData.subject);
+        formDataToSend.append('subject', `New Contact Form Submission: ${formData.subject}`);
         formDataToSend.append('message', formData.message);
         formDataToSend.append('from_name', 'SmartView Télé Contact Form');
+
+        // Only append phone if it exists
+        if (formData.phone.trim()) {
+          formDataToSend.append('phone', formData.phone);
+        }
         
         const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -123,6 +144,7 @@ const Contact = () => {
         });
         
         const data = await response.json();
+        console.log("Web3Forms response:", data);
         
         if (data.success) {
           // Success
@@ -140,8 +162,9 @@ const Contact = () => {
           });
         } else {
           // Error
+          console.error("Submission failed:", data.message);
           setAlertVariant('danger');
-          setAlertMessage(t.alerts.error);
+          setAlertMessage(data.message || t.alerts.error);
         }
       } catch (error) {
         console.error('Error submitting form:', error);
@@ -158,7 +181,7 @@ const Contact = () => {
       }
     } else {
       setAlertVariant('danger');
-      setAlertMessage(t.alerts.fixErrors);
+      setAlertMessage(t.alerts.validationError);
       setShowAlert(true);
     }
   };
@@ -166,14 +189,15 @@ const Contact = () => {
   // Redirect to WhatsApp
   const redirectToWhatsApp = () => {
     const phoneNumber = '+2250575965968'; 
-    const message = `Hello, my name is ${formData.name}. ${formData.message}`;
+    const greeting = t.whatsappMessage.greeting;
+    const message = `${greeting} ${formData.name}. ${formData.message}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${encodedMessage}`;
     
     window.open(whatsappUrl, '_blank');
     
     setAlertVariant('success');
-    setAlertMessage(t.alerts.redirectWhatsApp);
+    setAlertMessage(t.alerts.redirectingToWhatsApp);
     setShowAlert(true);
   };
 
@@ -234,7 +258,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Form Section */}
-      <section className="contact-form-section">
+      <section className="contact-form-section" ref={alertRef}>
         <Container>
           <Row>
             <Col lg={6} className="mb-5 mb-lg-0">
@@ -386,17 +410,18 @@ const Contact = () => {
                           aria-hidden="true"
                           className="me-2"
                         />
-                        Sending...
+                        {t.contactButton.sending}
                       </>
                     ) : (
-                      formData.contactMethod === 'whatsapp' ? t.submitWhatsApp : t.submitEmail
+                      formData.contactMethod === 'whatsapp' 
+                      ? t.contactButton.contactViaWhatsapp  
+                      : t.contactButton.sendMessage
                     )}
                   </Button>
                 </Form>
               </div>
             </Col>
-
-            {/* Whatsapp form section */}
+            
             <Col lg={6}>
               <div className="contact-whatsapp-wrapper">
                 <div className="whatsapp-content">
@@ -404,15 +429,13 @@ const Contact = () => {
                     <FaWhatsapp />
                   </div>
                   <h2>{t.whatsappTitle}</h2>
-                  <p>
-                    {t.whatsappText}
-                  </p>
+                  <p>{t.whatsappText}</p>
                   <Button 
                     variant="success" 
                     className="whatsapp-btn"
                     onClick={() => {
                       const phoneNumber = '+2250575965968'; 
-                      const message = encodeURIComponent('Hello, I am interested in your Smart TVs.');
+                      const message = encodeURIComponent(t.whatsappMessage.whatsappTextMessage);
                       window.open(`https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${message}`, '_blank');
                     }}
                   >
@@ -434,6 +457,7 @@ const Contact = () => {
                     <a 
                       href="https://www.facebook.com/share/18RmyzRPdq/?mibextid=wwXIfr" className="social-icon"
                       target="_blank"
+                      aria-label="Facebook"
                       rel="noopener noreferrer"
                     >
                       <FaFacebookF />
@@ -442,6 +466,7 @@ const Contact = () => {
                       href="https://www.instagram.com/tele_adjame_isreal?igsh=MWdobG9ydzF4eHZueQ%3D%3D&utm_source=qr" 
                       className="social-icon"
                       target='_blank'
+                      aria-label="Instagram"
                       rel="noopener noreferrer"
                     >
                       <FaInstagram />
@@ -450,6 +475,7 @@ const Contact = () => {
                       className="social-icon"
                       href="https://www.tiktok.com/@isrealokey6?_t=ZM-8wESJbNhVLy&_r=1" 
                       target="_blank" 
+                      aria-label="TikTok"
                       rel="noopener noreferrer"
                     >
                       <SiTiktok />
@@ -463,22 +489,9 @@ const Contact = () => {
       </section>
 
       {/* Map Section */}
-      <section className="map-section">
-        <Container fluid className="p-0">
-          <div className="map-container">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.9699408155086!2d-4.037173825911917!3d5.684915794112361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ebfe1a2c5bd5%3A0x59aa87b9e4d865be!2sRue%20Nimlin%20Fax-Clark%2C%20Abidjan%2C%20C%C3%B4te%20d'Ivoire!5e0!3m2!1sen!2sus!4v1714400000000!5m2!1sen!2sus"
-              width="100%" 
-              height="450" 
-              style={{ border: 0 }} 
-              allowFullScreen="" 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-              title="SmartView Télé Location"
-            ></iframe>
-          </div>
-        </Container>
-      </section>
+      <Suspense fallback={<div className="text-center py-4">Loading map...</div>}>
+        <MapSection />
+      </Suspense>
     </div>
   );
 };

@@ -7,7 +7,7 @@
   .faqs-container {
     max-width: 1200px;
     margin: 0 auto;
-  }
+  }                        
   
   /* Header Styling */
   .faqs-main-title {
@@ -113,10 +113,6 @@
     opacity: 0.7;
     transition: opacity 0.3s ease;
     scroll-margin-top: 120px;
-  }
-  
-  .faq-category.active {
-    opacity: 1;
   }
   
   .category-title {
@@ -251,6 +247,7 @@
   .contact-buttons .btn-primary:hover {
     background-color: #ffa000;
     border-color: #ffa000;
+    color: #fff;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(255, 179, 0, 0.3);
   }
@@ -362,6 +359,10 @@
     
     .category-title {
       font-size: 1.4rem;
+    }
+
+    .faq-accordion-container {
+      padding-left: 10px;
     }
 
     .justify-content-center {

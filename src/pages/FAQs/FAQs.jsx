@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { Container, Row, Col, Accordion } from "react-bootstrap"
 import faqCategories from "./faqCategories"
 import { useNavigate } from "react-router-dom"
@@ -6,7 +6,7 @@ import { useTVContext } from "../../context/TVContext"
 import "./FAQs.css"
 
 const FAQs = () => {
-  const { translations, language } = useTVContext()
+  const { translations } = useTVContext()
 
   // Track active category for mobile view
   const [activeCategory, setActiveCategory] = useState("general")

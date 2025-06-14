@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from 'react';
-import smartview_video from "../../assets/smartview_video.mov";
 import { FaPlay } from 'react-icons/fa';
 import { useTVContext } from '../../context/TVContext';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
@@ -29,7 +28,7 @@ const About = ({ playState, setPlayState }) => {
         </div>
         <div className="image-container">
           <img 
-            src="https://i.pinimg.com/736x/d8/17/29/d8172984bb54dc8af11165c7e7bae97e.jpg" alt="Our company history" 
+            src="https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749913084/About_-_Our_Story_bthrky.jpg" alt="Our company history" 
             className="about-image" 
             loading="lazy"  // Native lazy loading
             decoding="async" // Better performance
@@ -40,7 +39,7 @@ const About = ({ playState, setPlayState }) => {
       <section className="about-section mission-section">
         <div className="image-container">
           <img 
-            src="https://i.pinimg.com/736x/91/bb/91/91bb917f284d871088a8467df0949046.jpg" alt="Our mission" 
+            src="https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749913106/About_-_Our_Mission_bjlhib.jpg" alt="Our mission" 
             className="about-image" 
             loading="lazy"  // Native lazy loading
             decoding="async" // Better performance
@@ -64,7 +63,7 @@ const About = ({ playState, setPlayState }) => {
         <div className="video-container">
           <div className="video-placeholder" onClick={() => setPlayState(true)}>
             <img 
-              src="https://i.pinimg.com/736x/91/bb/91/91bb917f284d871088a8467df0949046.jpg" alt="SmartView Télé video preview" 
+              src="https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749913127/About_-_Video_Thumbnail_ibeolm.jpg" alt="SmartView Télé video preview" 
               className="video-thumbnail" 
               loading="lazy"  // Native lazy loading
               decoding="async" // Better performance
@@ -86,7 +85,6 @@ const About = ({ playState, setPlayState }) => {
         <Suspense fallback={<LoadingSpinner />}>
           {playState && (
             <VideoPlayer 
-              video={smartview_video} 
               playState={playState} 
               setPlayState={setPlayState} 
             />

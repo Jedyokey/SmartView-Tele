@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react"
 import { FaTimes } from "react-icons/fa"
 import "./VideoPlayer.css"
 
-const VideoPlayer = ({ video, playState, setPlayState }) => {
+const VideoPlayer = ({ playState, setPlayState }) => {
   const videoRef = useRef(null)
 
   useEffect(() => {
@@ -69,10 +69,22 @@ const VideoPlayer = ({ video, playState, setPlayState }) => {
       <div className="video-wrapper" onClick={(e) => e.stopPropagation()}>
         <video
           ref={videoRef}
-          src={video}
           controls
           controlsList="nodownload"
-        />
+        >
+          {/* Primary source (.mov) */}
+          <source 
+            src="https://res.cloudinary.com/dip0otvct/video/upload/v1749784731/smartview_video_saluuq.mov" 
+            type="video/quicktime"
+          />
+          {/* Fallback source (.mp4) */}
+          <source 
+            src="https://res.cloudinary.com/dip0otvct/video/upload/v1749788607/smartview_video_ocurad.mp4" 
+            type="video/mp4"
+          />
+          {/* Fallback text for browsers that don't support video */}
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
   )

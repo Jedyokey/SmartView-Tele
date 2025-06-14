@@ -15,7 +15,11 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
     getSizes,
     getPriceRange,
     formatPrice,
+    translations,
+    language,
   } = useTVContext()
+
+  const t = translations.filterSidebar
 
   const [priceRange, setPriceRange] = useState(filters.priceRange)
 
@@ -33,11 +37,32 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
     updateFilter("priceRange", priceRange)
   }
 
+  // Get localized sizes - temporary fix until context is updated
+  const getLocalizedSizes = () => {
+    const sizes = getSizes()
+    if (sizes.length === 0) {
+      // Fallback: extract sizes from products directly
+      const products = JSON.parse(localStorage.getItem("products")) || []
+      const uniqueSizes = new Set()
+
+      products.forEach((product) => {
+        const sizeField = language === "fr" ? "size_fr" : "size_en"
+        const size = product[sizeField] || product.size_en || product.size
+        if (size) {
+          uniqueSizes.add(size)
+        }
+      })
+
+      return Array.from(uniqueSizes).sort()
+    }
+    return sizes
+  }
+
   return (
     <>
       <div className={`filter-sidebar ${!isDesktop && showFilters ? "show" : ""} ${isDesktop ? "desktop" : "mobile"}`}>
         <div className="filter-header">
-          <h5>Filters</h5>
+          <h5>{t.filters}</h5>
           {!isDesktop && (
             <Button variant="link" className="close-filters" onClick={toggleFilters}>
               <XCircle size={24} />
@@ -47,13 +72,13 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
 
         <div className="filter-actions">
           <Button variant="outline-secondary" size="sm" onClick={clearFilters} className="clear-btn">
-            Clear All
+            {t.clearAll}
           </Button>
         </div>
 
         <Accordion defaultActiveKey={["0", "1", "2", "3"]} alwaysOpen>
           <Accordion.Item eventKey="0">
-            <Accordion.Header>Brand</Accordion.Header>
+            <Accordion.Header>{t.brand}</Accordion.Header>
             <Accordion.Body>
               <Form>
                 {getBrands().map((brand) => (
@@ -72,7 +97,7 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
           </Accordion.Item>
 
           <Accordion.Item eventKey="1">
-            <Accordion.Header>Category</Accordion.Header>
+            <Accordion.Header>{t.category}</Accordion.Header>
             <Accordion.Body>
               <Form>
                 {getCategories().map((category) => (
@@ -91,10 +116,10 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
           </Accordion.Item>
 
           <Accordion.Item eventKey="2">
-            <Accordion.Header>Screen Size</Accordion.Header>
+            <Accordion.Header>{t.screenSize}</Accordion.Header>
             <Accordion.Body>
               <Form>
-                {getSizes().map((size) => (
+                {getLocalizedSizes().map((size) => (
                   <Form.Check
                     key={size}
                     type="checkbox"
@@ -110,11 +135,11 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
           </Accordion.Item>
 
           <Accordion.Item eventKey="3">
-            <Accordion.Header>Price Range</Accordion.Header>
+            <Accordion.Header>{t.priceRange}</Accordion.Header>
             <Accordion.Body>
               <div className="price-range-inputs">
                 <Form.Group>
-                  <Form.Label>Min Price</Form.Label>
+                  <Form.Label>{t.minPrice}</Form.Label>
                   <Form.Control
                     type="number"
                     name="min"
@@ -126,7 +151,7 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Label>Max Price</Form.Label>
+                  <Form.Label>{t.maxPrice}</Form.Label>
                   <Form.Control
                     type="number"
                     name="max"
@@ -157,7 +182,7 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
               />
 
               <Button variant="primary" size="sm" onClick={applyPriceRange} className="apply-price-btn">
-                Apply
+                {t.apply}
               </Button>
             </Accordion.Body>
           </Accordion.Item>
@@ -168,7 +193,7 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
 
       {!isDesktop && (
         <Button variant="primary" className="filter-toggle-btn d-md-none" onClick={toggleFilters}>
-          <Sliders /> Filters
+          <Sliders /> {t.filters}
         </Button>
       )}
     </>
@@ -176,8 +201,3 @@ const FilterSidebar = ({ showFilters, toggleFilters, isDesktop = false }) => {
 }
 
 export default FilterSidebar
-
-
-
-
-

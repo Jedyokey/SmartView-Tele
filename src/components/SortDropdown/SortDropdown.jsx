@@ -1,23 +1,25 @@
-import { Dropdown } from "react-bootstrap"
-import { SortDown } from "react-bootstrap-icons"
-import "./SortDropdown.css"
-import { useTVContext } from "../../context/TVContext"
+import { Dropdown } from "react-bootstrap";
+import { SortDown } from "react-bootstrap-icons";
+import "./SortDropdown.css";
+import { useTVContext } from "../../context/TVContext";
 
 const SortDropdown = () => {
-  const { sortOption, setSortOption } = useTVContext()
+  const { sortOption, setSortOption, translations } = useTVContext();
+
+  const t = translations.sort;
 
   const sortOptions = [
-    { value: "featured", label: "Featured" },
-    { value: "price-low", label: "Price: Low to High" },
-    { value: "price-high", label: "Price: High to Low" },
-    { value: "rating", label: "Highest Rated" },
-    { value: "newest", label: "Newest Arrivals" },
-  ]
+    { value: "featured", label: t.featured },
+    { value: "price-low", label: t.priceLowToHigh },
+    { value: "price-high", label: t.priceHighToLow },
+    { value: "rating", label: t.rating },
+    { value: "newest", label: t.newest }
+  ];
 
   const getCurrentSortLabel = () => {
-    const option = sortOptions.find((opt) => opt.value === sortOption)
-    return option ? option.label : "Sort By"
-  }
+    const option = sortOptions.find((opt) => opt.value === sortOption);
+    return option ? option.label : t.sortBy;
+  };
 
   return (
     <Dropdown className="sort-dropdown">
@@ -37,7 +39,7 @@ const SortDropdown = () => {
         ))}
       </Dropdown.Menu>
     </Dropdown>
-  )
-}
+  );
+};
 
-export default SortDropdown
+export default SortDropdown;

@@ -732,23 +732,30 @@ const smartTVs = [
   },
 ]
 
-// Add these optimizations to your data.js:
-
-// 1. Add image size parameters to Cloudinary URLs
+// Add image size parameters to Cloudinary URLs and fallback handling
 const optimizeImageUrl = (url) => {
-  return url.replace('/upload/', '/upload/w_auto,c_scale,q_auto,f_auto/');
+  if (!url) return '/placeholder.svg';
+  try {
+    return url.replace('/upload/', '/upload/w_auto,c_scale,q_auto,f_auto/');
+  } catch (error) {
+    console.error('Error optimizing image URL:', error);
+    return '/placeholder.svg';
+  }
 };
 
-// 2. Add a function to get optimized images
+// Add a function to get optimized images with fallback
 const getOptimizedImages = (product) => {
+  const fallbackImage = '/placeholder.svg';
   return {
     ...product,
-    image: optimizeImageUrl(product.image),
-    additionalImages: product.additionalImages.map(img => optimizeImageUrl(img))
+    image: product.image ? optimizeImageUrl(product.image) : fallbackImage,
+    additionalImages: product.additionalImages 
+      ? product.additionalImages.map(img => img ? optimizeImageUrl(img) : fallbackImage)
+      : [fallbackImage]
   };
 };
 
-// 3. Create optimized data
+// Create optimized data with fallback handling
 const optimizedSmartTVs = smartTVs.map(getOptimizedImages);
 
 // Export both the original and optimized data

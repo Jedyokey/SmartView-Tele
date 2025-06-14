@@ -2,13 +2,16 @@ import { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert, Modal } from "react-bootstrap";
 import { FaEnvelope, FaPaperPlane, FaCheckCircle } from "react-icons/fa";
 import "./Newsletter.css";
+import { useTranslation } from "react-i18next";
 
 const Newsletter = () => {
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const [validated, setValidated] = useState(false);
-  const [showModal, setShowModal] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
 
   const handleCloseModal = () => setShowModal(false);
 
@@ -33,9 +36,9 @@ const Newsletter = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          access_key: "c24dc6ef-8062-4b51-9a87-a59e90a306e3", 
+          access_key: "c24dc6ef-8062-4b51-9a87-a59e90a306e3",
           email: email,
-          subject: "New Newsletter Subscription",
+          subject: t("newsletter.title"),
           from_name: "SmartView Télé Newsletter",
         }),
       });
@@ -45,21 +48,21 @@ const Newsletter = () => {
       if (data.success) {
         setMessage({
           type: "success",
-          text: "Thank you for subscribing to our newsletter!",
+          text: t("newsletter.thankYouMessage"),
         });
-        setShowModal(true); // Show modal on success
+        setShowModal(true);
         setEmail("");
         setValidated(false);
       } else {
         setMessage({
           type: "danger",
-          text: "Something went wrong. Please try again.",
+          text: t("newsletter.errorGeneric"),
         });
       }
     } catch (error) {
       setMessage({
         type: "danger",
-        text: "An error occurred. Please try again later.",
+        text: t("newsletter.errorNetwork"),
       });
     } finally {
       setLoading(false);
@@ -75,8 +78,8 @@ const Newsletter = () => {
               <div className="newsletter-icon">
                 <FaEnvelope />
               </div>
-              <h2>Subscribe to Our Newsletter</h2>
-              <p>Stay updated with our latest products, special offers, and TV technology news</p>
+              <h2>{t("newsletter.title")}</h2>
+              <p>{t("newsletter.description")}</p>
 
               {message && message.type === "danger" && (
                 <Alert variant="danger" className="text-center">
@@ -88,7 +91,7 @@ const Newsletter = () => {
                 <div className="newsletter-form">
                   <Form.Control
                     type="email"
-                    placeholder="Enter your email address"
+                    placeholder={t("newsletter.emailPlaceholder")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -96,20 +99,20 @@ const Newsletter = () => {
                   />
                   <Button type="submit" className="subscribe-btn" disabled={loading}>
                     {loading ? (
-                      "Subscribing..."
+                      t("newsletter.subscribing")
                     ) : (
                       <>
-                        Subscribe <FaPaperPlane />
+                        {t("newsletter.subscribeBtn")} <FaPaperPlane />
                       </>
                     )}
                   </Button>
                 </div>
                 <Form.Control.Feedback type="invalid" className="text-center">
-                  Please provide a valid email address.
+                  {t("newsletter.invalidEmail")}
                 </Form.Control.Feedback>
               </Form>
 
-              <div className="privacy-note">We respect your privacy. Unsubscribe at any time.</div>
+              <div className="privacy-note">{t("newsletter.privacyNote")}</div>
             </div>
           </Col>
         </Row>
@@ -119,10 +122,10 @@ const Newsletter = () => {
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Body className="text-center">
           <FaCheckCircle size={70} className="text-success mb-3" />
-          <h4>Thank You!</h4>
-          <p>You have successfully subscribed to SmartView Télé's newsletter. Stay tuned for exciting updates!</p>
+          <h4>{t("newsletter.thankYouTitle")}</h4>
+          <p>{t("newsletter.thankYouMessage")}</p>
           <Button variant="success" onClick={handleCloseModal} className="mt-3">
-            Close
+            {t("newsletter.closeBtn")}
           </Button>
         </Modal.Body>
       </Modal>

@@ -120,6 +120,7 @@
   
     .newsletter-form .form-control {
       padding-right: 20px;
+      margin-bottom: -3px;
     }
   
     .newsletter-section .subscribe-btn {

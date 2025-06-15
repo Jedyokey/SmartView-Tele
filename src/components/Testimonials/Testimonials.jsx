@@ -1,60 +1,44 @@
-import { useState } from "react"
-import { Container } from "react-bootstrap"
-import { FaQuoteLeft, FaStar, FaChevronLeft, FaChevronRight } from "react-icons/fa"
-import "./Testimonials.css"
+import { useState } from "react";
+import { Container } from "react-bootstrap";
+import { FaQuoteLeft, FaStar, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import "./Testimonials.css";
+import { useTranslation } from "react-i18next";
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      id: 1,
-      name: "Jean Kouassi",
-      position: "Business Owner",
-      image: "/placeholder.svg?height=100&width=100",
-      rating: 5,
-      text: "The quality of the Samsung QLED TV I purchased from SmartView Télé exceeded my expectations. The colors are vibrant and the customer service was exceptional. Highly recommended!",
-    },
-    {
-      id: 2,
-      name: "Marie Diallo",
-      position: "Interior Designer",
-      image: "/placeholder.svg?height=100&width=100",
-      rating: 5,
-      text: "I bought an LG OLED TV for my new apartment and I am amazed by the picture quality. The team at SmartView Télé was very helpful in guiding me to choose the right model for my space.",
-    },
-    {
-      id: 3,
-      name: "Ahmed Touré",
-      position: "Tech Enthusiast",
-      image: "/placeholder.svg?height=100&width=100",
-      rating: 4,
-      text: "Great selection of smart TVs with competitive prices. The delivery was prompt and the installation service was professional. Will definitely shop here again for my tech needs.",
-    },
-  ]
+  const { t } = useTranslation();
 
-  const [activeIndex, setActiveIndex] = useState(0)
+  const testimonialImages = [
+    "https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749970027/Jean_testimonial_xxqaoi.jpg",
+    "https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749970041/Marie_testimonial_c6mn5x.jpg",
+    "https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749970054/Ahmed_testimonial_rtryka.jpg",
+  ];
+
+  const testimonials = t("testimonials.entries", { returnObjects: true });
+
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const nextTestimonial = () => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
-  }
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
   const prevTestimonial = () => {
-    setActiveIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1))
-  }
+    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
 
   const renderStars = (rating) => {
-    const stars = []
+    const stars = [];
     for (let i = 0; i < 5; i++) {
-      stars.push(<FaStar key={i} className={i < rating ? "star filled" : "star empty"} />)
+      stars.push(<FaStar key={i} className={i < rating ? "star filled" : "star empty"} />);
     }
-    return stars
-  }
+    return stars;
+  };
 
   return (
     <section className="testimonials-section">
       <Container>
         <div className="section-header">
-          <h2>What Our Customers Say</h2>
-          <p>Hear from our satisfied customers about their experience</p>
+          <h2>{t("testimonials.title")}</h2>
+          <p>{t("testimonials.description")}</p>
         </div>
 
         <div className="testimonials-container">
@@ -63,13 +47,16 @@ const Testimonials = () => {
               <FaQuoteLeft />
             </div>
 
-            <div className="testimonial-rating">{renderStars(testimonials[activeIndex].rating)}</div>
+            <div className="testimonial-rating">{renderStars(5)}</div>
 
             <p className="testimonial-text">{testimonials[activeIndex].text}</p>
 
             <div className="testimonial-author">
               <div className="author-image">
-                <img src={testimonials[activeIndex].image || "/placeholder.svg"} alt={testimonials[activeIndex].name} />
+                <img
+                  src={testimonialImages[activeIndex] || "/placeholder.svg"}
+                  alt={testimonials[activeIndex].name}
+                />
               </div>
               <div className="author-info">
                 <h4>{testimonials[activeIndex].name}</h4>
@@ -98,7 +85,7 @@ const Testimonials = () => {
         </div>
       </Container>
     </section>
-  )
-}
+  );
+};
 
-export default Testimonials
+export default Testimonials;

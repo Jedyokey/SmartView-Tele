@@ -130,8 +130,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 👥 Contact
 
 For any inquiries, please contact:
-- Email: isrealokeyonyeze@gmail.com
-- WhatsApp: +225 05 7596 5968
+- Email: jedyokey29@gmail.com
+- WhatsApp: +225 05 0143 6430
 - Location: Adjame, Abidjan, Côte d'Ivoire
 
 ## 🙏 Acknowledgments

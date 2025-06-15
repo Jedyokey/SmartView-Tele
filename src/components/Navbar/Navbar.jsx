@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link, NavLink, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom"
 import { Container, Nav, Navbar, Form, FormControl } from "react-bootstrap"
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa"
 import { useTranslation } from "react-i18next" 
@@ -7,15 +7,17 @@ import { useTVContext } from "../../context/TVContext"
 import "./Navbar.css"
 import logo from "../../assets/smartview-pro-logo-2.png"
 import LanguageToggle from "../LanguageToggle/LanguageToggle"
+import { scrollToTop } from "../../utils/scrollToTop"
 
 const Navigation = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
 
-  const { language } = useTVContext()
+  const { language, languageLoading, switchLanguageWithLoading } = useTVContext()
   const { t, i18n } = useTranslation()
 
   // Sync i18next language with global language from context
@@ -68,12 +70,40 @@ const Navigation = () => {
     }
   }
 
+  // Handle language change
+  const handleLanguageChange = (lang) => {
+    if (lang !== language && !languageLoading) {
+      localStorage.setItem("preferredLanguage", lang)
+      switchLanguageWithLoading(lang)
+      
+      // Close mobile menu if open
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false)
+        document.body.style.overflow = 'unset'
+      }
+
+      // Use setTimeout to ensure scrolling happens after state updates
+      setTimeout(() => {
+        scrollToTop()
+      }, 100)
+    }
+  }
+
   return (
     <>
       <Navbar expand="lg" className="main-navbar py-2">
         <Container className="custom-container">
           {/* Logo - always visible */}
-            <Navbar.Brand as={Link} to="/" className="brand-logo">
+            <Navbar.Brand 
+              as={Link} 
+              to="/" 
+              className="brand-logo"
+              onClick={() => {
+                if (location.pathname === '/') {
+                  scrollToTop();
+                }
+              }}
+            >
               <img src={logo || "/placeholder.svg"} alt="SmartView Tele Logo" className="logo-img" />
               <span className="brand-text">
                 Smart<span className="view-text">View</span>
@@ -161,8 +191,8 @@ const Navigation = () => {
         </Container>
       </Navbar>
 
-      {/* Mobile Search Bar - Only visible on mobile */}
-      {isMobile && (
+      {/* Mobile Search Bar - Only visible on mobile and not on search page */}
+      {isMobile && !location.pathname.includes('/search') && (
         <div className="mobile-search-container">
           <Form className="d-flex mobile-search-form" onSubmit={handleSearch}>
             <div className="search-wrapper">
@@ -311,7 +341,7 @@ const Navigation = () => {
 
               {/* Language Toggle in Mobile Menu */}
               <div className="mobile-language-toggle">
-                <LanguageToggle />
+                <LanguageToggle onLanguageChange={handleLanguageChange} />
               </div>
             </div>
           </div>

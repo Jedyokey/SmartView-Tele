@@ -91,7 +91,11 @@ const Footer = () => {
     if (lang !== language && !languageLoading) {
       localStorage.setItem("preferredLanguage", lang)
       switchLanguageWithLoading(lang)
-      scrollToTop()
+      
+      // Use setTimeout to ensure scrolling happens after state updates
+      setTimeout(() => {
+        scrollToTop()
+      }, 100)
     }
   }
 
@@ -143,7 +147,15 @@ const Footer = () => {
           <Row>
             {/* Business Info */}
             <Col lg={3} md={6} sm={12} className="footer-column">
-              <Link to="/" className="footer-logo d-flex align-items-center text-decoration-none">
+              <Link 
+                to="/" 
+                className="footer-logo d-flex align-items-center text-decoration-none"
+                onClick={() => {
+                  if (window.location.pathname === '/') {
+                    scrollToTop();
+                  }
+                }}
+              >
                 <img src={logo || "/placeholder.svg"} alt="SmartView Tele Logo" className="logo-img" />
                 <h2 className="mb-0">
                   SmartView <span>Télé</span>

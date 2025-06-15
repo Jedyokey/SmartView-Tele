@@ -68,7 +68,7 @@
     border-radius: 10px;
     transition: all 0.3s ease;
     height: 100%;
-    min-height: 380px; 
+    min-height: 150px !important; 
   }
   
   .contact-info-item:hover {
@@ -406,7 +406,7 @@
     }
     
     .contact-whatsapp-wrapper {
-      margin-top: 40px;
+      margin-top: 8px !important;
     }
   }
   
@@ -471,4 +471,35 @@
     .business-hours li span {
       margin-bottom: 5px;
     }
+  }
+
+  .store-description {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .store-description h3 {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  .store-description p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* Adjust spacing between sections */
+  .business-hours {
+    margin-bottom: 20px;
+  }
+
+  .social-connect {
+    margin-top: 20px;
   }

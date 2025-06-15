@@ -43,7 +43,7 @@ const smartTVs = [
     inStock: true,
     isFeatured: true,
     rating: 4.7,
-    reviews: 120,
+    reviews: 55,
     language: ["English", "French"],
   },
   {
@@ -82,7 +82,7 @@ const smartTVs = [
     inStock: true,
     isFeatured: true,
     rating: 4.8,
-    reviews: 150,
+    reviews: 60,
     language: ["English", "French"],
   },
   {
@@ -127,7 +127,7 @@ const smartTVs = [
     inStock: true,
     isFeatured: false,
     rating: 4.5,
-    reviews: 80,
+    reviews: 40,
     language: ["English", "French"],
   },
   {
@@ -172,7 +172,7 @@ const smartTVs = [
     inStock: true,
     isFeatured: false,
     rating: 4.3,
-    reviews: 60,
+    reviews: 37,
     language: ["English", "French"],
   },
   {
@@ -252,7 +252,7 @@ const smartTVs = [
     inStock: true,
     isFeatured: true,
     rating: 4.6,
-    reviews: 95,
+    reviews: 45,
     language: ["English", "French"],
   },
   {
@@ -299,7 +299,7 @@ const smartTVs = [
     inStock: true,
     isFeatured: true,
     rating: 4.9,
-    reviews: 120,
+    reviews: 60,
     language: ["English", "French"],
   },
   {
@@ -346,7 +346,7 @@ const smartTVs = [
     inStock: true,
     isFeatured: false,
     rating: 4.7,
-    reviews: 85,
+    reviews: 65,
     language: ["English", "French"],
   },
   {
@@ -439,7 +439,7 @@ const smartTVs = [
     inStock: true,
     isFeatured: false,
     rating: 4.6,
-    reviews: 90,
+    reviews: 50,
     language: ["English", "French"],
   },
   {

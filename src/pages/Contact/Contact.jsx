@@ -1,4 +1,4 @@
-import React, { useState, useRef, lazy, Suspense } from 'react';
+import React, { useState, useRef, lazy, Suspense, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Spinner, InputGroup } from 'react-bootstrap';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaWhatsapp, FaFacebookF, FaInstagram} from 'react-icons/fa';
 import { SiTiktok } from "react-icons/si";
@@ -29,6 +29,22 @@ const Contact = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertVariant, setAlertVariant] = useState('success');
   const [alertMessage, setAlertMessage] = useState('');
+
+  // Update error messages when language changes
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      // Re-validate the form to get new error messages in the current language
+      validateForm();
+    }
+    // Update alert message if it's showing
+    if (showAlert) {
+      if (alertVariant === 'danger') {
+        setAlertMessage(t.alerts.validationError);
+      } else if (alertVariant === 'success') {
+        setAlertMessage(t.alerts.success);
+      }
+    }
+  }, [t]); // Re-run when translations change
 
   // Web3Forms access key 
   const WEB3FORMS_ACCESS_KEY = 'c24dc6ef-8062-4b51-9a87-a59e90a306e3';
@@ -228,12 +244,6 @@ const Contact = () => {
               <h3>{t.visitTitle}</h3>
               <p>{t.visitAddress1}</p>
               <p>{t.visitAddress2}</p>
-
-              {/* Extra Store Description */}
-              <div className="store-extra-info">
-                <h5>{t.storeExtraTitle}</h5>
-                <p>{t.storeExtraDescription}</p>
-              </div>
             </Col>
             
             <Col lg={4} md={6} className="contact-info-item">
@@ -448,6 +458,12 @@ const Contact = () => {
                       <li><span>{t.mondayToSaturday}</span> 7:00 AM - 7:00 PM</li>
                       <li><span>{t.sunday}</span> {t.closed}</li>
                     </ul>
+                  </div>
+
+                  {/* Extra Store Description Section */}
+                  <div className="store-description">
+                    <h3>{t.storeExtraTitle}</h3>
+                    <p>{t.storeExtraDescription}</p>
                   </div>
                 </div>
                 

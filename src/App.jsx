@@ -34,13 +34,11 @@ const AppContent = () => {
       {/* Language Loading Overlay */}
       {languageLoading && <LanguageLoader targetLanguage={targetLanguage} currentLanguage={language} />}
 
-      {/* <Suspense fallback={<LoadingSpinner fullPage />}> */}
         <TopBar />
         <Navbar />
         <ScrollToTop />
 
         <main>
-          {/* <Suspense fallback={<LoadingSpinner />}> */}
             <Routes>
               <Route path="/" element={
                 <Suspense fallback={<LoadingSpinner />}>
@@ -83,12 +81,10 @@ const AppContent = () => {
                 </Suspense>
               } />
             </Routes>
-          {/* </Suspense> */}
         </main>
 
         <Footer />
         <WhatsAppChat />
-      {/* </Suspense> */}
     </>
   )
 }

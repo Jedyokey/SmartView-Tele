@@ -27,7 +27,7 @@ i18n
       },
     },
     fallbackLng: "en",
-    debug: process.env.NODE_ENV === "development",
+    debug: false, // Disable debug mode to reduce console noise
 
     // Common namespace used around the full app
     ns: ["translation"],
@@ -41,13 +41,21 @@ i18n
     detection: {
       order: ["localStorage", "navigator"],
       caches: ["localStorage"],
+      // Suppress detection logs
+      lookupLocalStorage: "appLanguage",
+      lookupQuerystring: false,
+      lookupCookie: false,
+      lookupSessionStorage: false,
     },
 
-    // React specific options
+    // React specific options - Updated to remove deprecated options
     react: {
       useSuspense: true,
-      wait: true,
     },
+
+    // Suppress unnecessary logs
+    saveMissing: false,
+    missingKeyHandler: false,
   })
 
 export default i18n

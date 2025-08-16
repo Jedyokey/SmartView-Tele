@@ -8,7 +8,47 @@ import i18n from "i18next"
 const TVContext = createContext()
 
 // Custom hook to use the TV context
-export const useTVContext = () => useContext(TVContext)
+export const useTVContext = () => {
+  const context = useContext(TVContext)
+  if (context === undefined) {
+    // Return a default context object to prevent errors
+    return {
+      products: [],
+      filteredProducts: [],
+      loading: true,
+      filters: {
+        brand: [],
+        category: [],
+        size: [],
+        priceRange: { min: 0, max: 1500000 },
+      },
+      sortOption: "featured",
+      language: "en",
+      languageLoading: false,
+      targetLanguage: null,
+      setSortOption: () => {},
+      updateFilter: () => {},
+      toggleFilter: () => {},
+      clearFilters: () => {},
+      getBrands: () => [],
+      getCategories: () => [],
+      getSizes: () => [],
+      getSizeKeys: () => [],
+      getPriceRange: () => ({ min: 0, max: 1500000 }),
+      formatPrice: (price) => price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " CFA",
+      setLanguage: () => {},
+      switchLanguageWithLoading: () => {},
+      reloadProducts: () => {},
+      translations: {},
+      getLocalizedText: (product, field, fallback = "") => fallback,
+      getSizeKey: (localizedSize) => localizedSize,
+      getLocalizedSizeFromKey: (neutralKey) => neutralKey,
+      isSizeSelected: () => false,
+      getSelectedSizesForDisplay: () => [],
+    }
+  }
+  return context
+}
 
 export const TVProvider = ({ children }) => {
   // State for products
@@ -328,7 +368,7 @@ export const TVProvider = ({ children }) => {
     setLanguage,
     switchLanguageWithLoading,
     reloadProducts,
-    translations: translations[language],
+    translations: translations[language] || translations.en, // Provide current language translations with fallback
     getLocalizedText,
     getSizeKey,
     getLocalizedSizeFromKey,

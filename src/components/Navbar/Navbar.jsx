@@ -18,7 +18,7 @@ const Navigation = () => {
   const [searchQuery, setSearchQuery] = useState("")
 
   const { language, languageLoading, switchLanguageWithLoading } = useTVContext()
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation(undefined, { useSuspense: false })
 
   // Sync i18next language with global language from context
   useEffect(() => {

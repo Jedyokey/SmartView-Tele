@@ -33,18 +33,33 @@ export default defineConfig({
     cssCodeSplit: true,
     // Enable assets optimization
     assetsInlineLimit: 4096, // 4kb
+    // Set base URL for Hostinger
+    base: '/',
   },
 
   // Development server options
   server: {
-    // Enable HMR
-    hmr: true,
+    // Enable HMR with better configuration
+    hmr: {
+      port: 5173,
+      host: 'localhost',
+      protocol: 'ws'
+    },
     // Enable compression
     compress: true,
     // Enable caching
     force: false,
     // Enable source maps
     sourcemapIgnoreList: false,
+    // Better history API fallback for SPA
+    historyApiFallback: {
+      index: '/index.html'
+    },
+    // Add host configuration
+    host: 'localhost',
+    port: 5173,
+    // Add strict port checking
+    strictPort: true
   },
 
   // Optimize dependencies

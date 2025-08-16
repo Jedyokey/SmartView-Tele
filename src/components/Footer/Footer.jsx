@@ -22,8 +22,11 @@ const Footer = () => {
   const [loading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
-  // Get language functions from context
-  const { language, switchLanguageWithLoading, languageLoading } = useTVContext()
+  // Get language functions from context with safety checks
+  const context = useTVContext()
+  const language = context?.language || "en"
+  const switchLanguageWithLoading = context?.switchLanguageWithLoading || (() => {})
+  const languageLoading = context?.languageLoading || false
 
   // Content in both languages
   const content = {
@@ -83,8 +86,8 @@ const Footer = () => {
     },
   }
 
-  // Current language content
-  const t = content[language]
+  // Current language content with fallback
+  const t = content[language] || content.en
 
   // Handle language change
   const handleLanguageChange = (lang) => {

@@ -7,13 +7,7 @@ export default defineConfig({
 
   // Only affects the production build
   build: {
-    minify: 'terser', // Use terser instead of esbuild
-    terserOptions: {
-      compress: {
-        drop_console: true,     // Remove all console.* logs
-        drop_debugger: true,    // Remove debugger statements
-      },
-    },
+    minify: 'esbuild', // Use esbuild instead of terser (default and faster)
     rollupOptions: {
       output: {
         // Chunk size warning limit
@@ -35,6 +29,8 @@ export default defineConfig({
     assetsInlineLimit: 4096, // 4kb
     // Set base URL for Hostinger
     base: '/',
+    // Add chunk size warning limit
+    chunkSizeWarningLimit: 1000,
   },
 
   // Development server options
@@ -59,7 +55,11 @@ export default defineConfig({
     host: 'localhost',
     port: 5173,
     // Add strict port checking
-    strictPort: true
+    strictPort: true,
+    // Add open browser option
+    open: false,
+    // Add cors configuration
+    cors: true
   },
 
   // Optimize dependencies
@@ -67,8 +67,34 @@ export default defineConfig({
     include: ['react', 'react-dom', 'react-router-dom'],
     // Exclude dependencies that don't need optimization
     exclude: [],
+    // Force dependency optimization
+    force: false
   },
 
   // Cache options
   cacheDir: '.vite_cache',
+
+  // CSS options
+  css: {
+    // Enable CSS source maps in development
+    devSourcemap: true,
+    // PostCSS configuration
+    postcss: {
+      plugins: []
+    }
+  },
+
+  // Define global constants
+  define: {
+    // Add any global constants here
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+  },
+
+  // Resolve options
+  resolve: {
+    alias: {
+      // Add any path aliases here
+      '@': '/src',
+    }
+  }
 })

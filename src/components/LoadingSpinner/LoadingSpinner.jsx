@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next"
 import "./LoadingSpinner.css"
 
 const LoadingSpinner = () => {
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation(undefined, { useSuspense: false })
   
   // Use translation if available, otherwise fallback to English
-  const loadingText = i18n.isInitialized 
+  const loadingText = i18n?.isInitialized && t 
     ? t("common.loadingApp") 
     : "Loading SmartView Télé..."
 

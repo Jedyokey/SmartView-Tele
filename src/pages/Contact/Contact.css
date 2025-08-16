@@ -3,6 +3,22 @@
     background-color: #f8f9fa;
     color: #333;
   }
+
+/* Alert Animation */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slideInDown {
+  animation: slideInDown 0.3s ease-out;
+}
   
   /* Hero Section */
   .contact-hero {

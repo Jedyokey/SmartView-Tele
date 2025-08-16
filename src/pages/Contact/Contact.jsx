@@ -9,8 +9,9 @@ import './Contact.css';
 const MapSection = lazy(() => import('../../components/MapSection/MapSection'));
 
 const Contact = () => {
-  const { translations } = useTVContext()
-  const t = translations.contact
+  const context = useTVContext()
+  const translations = context?.translations
+  const t = translations?.contact
   const alertRef = useRef(null);
 
   // Form state
@@ -48,6 +49,90 @@ const Contact = () => {
 
   // Web3Forms access key 
   const WEB3FORMS_ACCESS_KEY = 'c24dc6ef-8062-4b51-9a87-a59e90a306e3';
+
+  // Function to translate Web3Forms error messages
+  const translateWeb3FormsError = (errorMessage) => {
+    const errorTranslations = {
+      en: {
+        'Invalid access key': 'Invalid access key',
+        'Rate limit exceeded': 'Too many requests. Please try again later.',
+        'Spam detected': 'Spam detected. Please check your input and try again.',
+        'Invalid email': 'Invalid email address',
+        'Missing required fields': 'Please fill in all required fields',
+        'Form submission failed': 'Form submission failed. Please try again.',
+        'Network error': 'Network error. Please check your connection and try again.',
+        'Server error': 'Server error. Please try again later.',
+        'Validation failed': 'Validation failed. Please check your input.',
+        'Bot detected': 'Bot activity detected. Please try again.',
+        'Honeypot field filled': 'Invalid form submission detected.',
+        'Access denied': 'Access denied. Please try again later.',
+        'Timeout': 'Request timeout. Please try again.',
+        'Invalid request': 'Invalid request. Please try again.',
+        'Service unavailable': 'Service temporarily unavailable. Please try again later.',
+      },
+      fr: {
+        'Invalid access key': 'Clé d\'accès invalide',
+        'Rate limit exceeded': 'Trop de demandes. Veuillez réessayer plus tard.',
+        'Spam detected': 'Spam détecté. Veuillez vérifier votre saisie et réessayer.',
+        'Invalid email': 'Adresse e-mail invalide',
+        'Missing required fields': 'Veuillez remplir tous les champs obligatoires',
+        'Form submission failed': 'Échec de l\'envoi du formulaire. Veuillez réessayer.',
+        'Network error': 'Erreur réseau. Veuillez vérifier votre connexion et réessayer.',
+        'Server error': 'Erreur serveur. Veuillez réessayer plus tard.',
+        'Validation failed': 'Échec de la validation. Veuillez vérifier votre saisie.',
+        'Bot detected': 'Activité de bot détectée. Veuillez réessayer.',
+        'Honeypot field filled': 'Soumission de formulaire invalide détectée.',
+        'Access denied': 'Accès refusé. Veuillez réessayer plus tard.',
+        'Timeout': 'Délai d\'attente dépassé. Veuillez réessayer.',
+        'Invalid request': 'Demande invalide. Veuillez réessayer.',
+        'Service unavailable': 'Service temporairement indisponible. Veuillez réessayer plus tard.',
+      }
+    };
+
+    const currentLanguage = context?.language || 'en';
+    const langTranslations = errorTranslations[currentLanguage] || errorTranslations.en;
+    
+    // Try to find a direct match
+    if (langTranslations[errorMessage]) {
+      return langTranslations[errorMessage];
+    }
+    
+    // Try to find partial matches for common error patterns
+    const lowerError = errorMessage.toLowerCase();
+    if (lowerError.includes('spam')) {
+      return langTranslations['Spam detected'];
+    }
+    if (lowerError.includes('rate limit') || lowerError.includes('too many')) {
+      return langTranslations['Rate limit exceeded'];
+    }
+    if (lowerError.includes('invalid email') || lowerError.includes('email')) {
+      return langTranslations['Invalid email'];
+    }
+    if (lowerError.includes('required') || lowerError.includes('missing')) {
+      return langTranslations['Missing required fields'];
+    }
+    if (lowerError.includes('network') || lowerError.includes('connection')) {
+      return langTranslations['Network error'];
+    }
+    if (lowerError.includes('server') || lowerError.includes('service')) {
+      return langTranslations['Server error'];
+    }
+    if (lowerError.includes('validation')) {
+      return langTranslations['Validation failed'];
+    }
+    if (lowerError.includes('bot')) {
+      return langTranslations['Bot detected'];
+    }
+    if (lowerError.includes('timeout')) {
+      return langTranslations['Timeout'];
+    }
+    if (lowerError.includes('access denied') || lowerError.includes('forbidden')) {
+      return langTranslations['Access denied'];
+    }
+    
+    // Fallback to generic error message
+    return langTranslations['Form submission failed'];
+  };
 
   // Handle input changes
   const handleChange = (e) => {
@@ -160,12 +245,18 @@ const Contact = () => {
         });
         
         const data = await response.json();
-        console.log("Web3Forms response:", data);
+        // console.log("Web3Forms response:", data);
         
         if (data.success) {
           // Success
           setAlertVariant('success');
           setAlertMessage(t.alerts.success);
+          setShowAlert(true);
+          
+          // Scroll to alert to ensure user sees the message
+          setTimeout(() => {
+            alertRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
           
           // Reset form
           setFormData({
@@ -176,24 +267,33 @@ const Contact = () => {
             message: '',
             contactMethod: 'email'
           });
+          
+          // Clear any existing errors
+          setErrors({});
         } else {
           // Error
           console.error("Submission failed:", data.message);
           setAlertVariant('danger');
-          setAlertMessage(data.message || t.alerts.error);
+          setAlertMessage(translateWeb3FormsError(data.message) || t.alerts.error);
+          setShowAlert(true);
+          
+          // Scroll to alert to ensure user sees the error
+          setTimeout(() => {
+            alertRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
         }
       } catch (error) {
         console.error('Error submitting form:', error);
         setAlertVariant('danger');
-        setAlertMessage(t.alerts.error);
+        setAlertMessage(translateWeb3FormsError(error.message) || t.alerts.error);
+        setShowAlert(true);
       } finally {
         setIsSubmitting(false);
-        setShowAlert(true);
         
-        // Auto-hide alert after 5 seconds
+        // Auto-hide alert after 8 seconds (increased from 5)
         setTimeout(() => {
           setShowAlert(false);
-        }, 5000);
+        }, 8000);
       }
     } else {
       setAlertVariant('danger');
@@ -281,8 +381,25 @@ const Contact = () => {
                     variant={alertVariant} 
                     onClose={() => setShowAlert(false)} 
                     dismissible
+                    className="mb-4"
+                    style={{
+                      fontSize: '16px',
+                      fontWeight: '500',
+                      border: 'none',
+                      borderRadius: '8px',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                      animation: 'slideInDown 0.3s ease-out'
+                    }}
                   >
-                    {alertMessage}
+                    <div className="d-flex align-items-center">
+                      {alertVariant === 'success' && (
+                        <span className="me-2" style={{ fontSize: '20px' }}>✅</span>
+                      )}
+                      {alertVariant === 'danger' && (
+                        <span className="me-2" style={{ fontSize: '20px' }}>❌</span>
+                      )}
+                      {alertMessage}
+                    </div>
                   </Alert>
                 )}
                 

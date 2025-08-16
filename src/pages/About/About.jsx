@@ -4,11 +4,41 @@ import { useTVContext } from '../../context/TVContext';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import "./About.css";
 
-// Lazy load heavy components
-const VideoPlayer = lazy(() => import('../../components/VideoPlayer/VideoPlayer'));
+// Lazy load heavy components with error handling
+const VideoPlayer = lazy(() => import('../../components/VideoPlayer/VideoPlayer').catch(() => {
+  // Fallback if VideoPlayer fails to load
+  return { default: () => <div>Video player unavailable</div> };
+}));
 
 const About = ({ playState, setPlayState }) => {
   const { translations } = useTVContext();
+
+  // Handle image loading errors
+  const handleImageError = (e) => {
+    e.target.style.display = 'none';
+    console.warn('Image failed to load:', e.target.src);
+  };
+
+  // Simple fallback content
+  if (!translations || !translations.about) {
+    return (
+      <div className="about-container">
+        <div className="about-hero">
+          <div className="hero-content">
+            <h1>About SmartView Télé</h1>
+            <p>Connecting the world through innovative technology</p>
+          </div>
+        </div>
+        <section className="about-section story-section">
+          <div className="section-content">
+            <h2>Our Story</h2>
+            <p>Founded in 2022, SmartView Télé began with a simple mission: to provide cutting-edge telecommunications products that enhance people's lives.</p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   const t = translations.about;
 
   return (
@@ -28,10 +58,12 @@ const About = ({ playState, setPlayState }) => {
         </div>
         <div className="image-container">
           <img 
-            src="https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749913084/About_-_Our_Story_bthrky.jpg" alt="Our company history" 
+            src="https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749913084/About_-_Our_Story_bthrky.jpg" 
+            alt="Our company history" 
             className="about-image" 
-            loading="lazy"  // Native lazy loading
-            decoding="async" // Better performance
+            loading="lazy"
+            decoding="async"
+            onError={handleImageError}
           />
         </div>
       </section>
@@ -39,10 +71,12 @@ const About = ({ playState, setPlayState }) => {
       <section className="about-section mission-section">
         <div className="image-container">
           <img 
-            src="https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749913106/About_-_Our_Mission_bjlhib.jpg" alt="Our mission" 
+            src="https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749913106/About_-_Our_Mission_bjlhib.jpg" 
+            alt="Our mission" 
             className="about-image" 
-            loading="lazy"  // Native lazy loading
-            decoding="async" // Better performance
+            loading="lazy"
+            decoding="async"
+            onError={handleImageError}
           />
         </div>
         <div className="section-content">
@@ -63,10 +97,12 @@ const About = ({ playState, setPlayState }) => {
         <div className="video-container">
           <div className="video-placeholder" onClick={() => setPlayState(true)}>
             <img 
-              src="https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749913127/About_-_Video_Thumbnail_ibeolm.jpg" alt="SmartView Télé video preview" 
+              src="https://res.cloudinary.com/dip0otvct/image/upload/f_auto,q_auto/v1749913127/About_-_Video_Thumbnail_ibeolm.jpg" 
+              alt="SmartView Télé video preview" 
               className="video-thumbnail" 
-              loading="lazy"  // Native lazy loading
-              decoding="async" // Better performance
+              loading="lazy"
+              decoding="async"
+              onError={handleImageError}
             />
             <div 
               className="play-button" 
